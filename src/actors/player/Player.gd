@@ -1,11 +1,14 @@
 class_name Player
 extends Node2D
 
-# Emitted when the player dropped a trash object
+# Emitted when the player dropped a trash object (i.e. let go of it)
 signal trash_dropped
+# Emitted when the player controlled trash collided with something and the player lost control
+signal trash_landed
 
 # Constants
 const TRASH_SPEED = 80
+const TRASH_ROT_SPEED = 5
 
 # State variables
 var current_trash: Trash = null
@@ -13,7 +16,7 @@ var current_trash: Trash = null
 
 func _process(delta):
     if current_trash:
-        if Input.is_action_just_pressed("ui_up"):
+        if Input.is_action_just_pressed("player1_up"):
             drop_trash()
         else:
             process_movement_input()
@@ -21,16 +24,25 @@ func _process(delta):
 func process_movement_input():
     # Process player movement
     var trash_direction = Vector2(0, 1)
-    if Input.is_action_pressed("ui_left"):
+    var trash_rotation = 0
+
+    if Input.is_action_pressed("player1_left"):
         trash_direction.x -= 1
-    if Input.is_action_pressed("ui_right"):
+    if Input.is_action_pressed("player1_right"):
         trash_direction.x += 1
-    if Input.is_action_pressed("ui_down"):
-        # Accelerate downwards motion
+
+    # Accelerate downwards motion
+    if Input.is_action_pressed("player1_down"):
         trash_direction.y += 1
-    
+
+    # Rotation
+    if Input.is_action_pressed("player1_turn_cw"):
+        trash_rotation += 1
+    if Input.is_action_pressed("player1_turn_ccw"):
+        trash_rotation -= 1
+
     # Set movement vector (exact movement is processed by the trash object)
-    current_trash.move_by_player(trash_direction * TRASH_SPEED)
+    current_trash.move_by_player(trash_direction * TRASH_SPEED, trash_rotation * TRASH_ROT_SPEED)
 
 
 # Start controlling a piece of trash
@@ -38,34 +50,42 @@ func take_trash(trash):
     # If the player is still controlling an object, drop it
     if current_trash:
         drop_trash()
-        
+
     print("[Player] Take trash")
-    
+
     # Take control of the trash
     trash.start_control()
-    trash.connect("dropped", self, "_on_Trash_dropped")
+    trash.connect("touched_world", self, "_on_Trash_touched_world")
     current_trash = trash
-    
+
 # Drop the trash the player is controlling
 func drop_trash():
     if not current_trash:
         return
-    
+
     print("[Player] Drop trash")
-    
+
     # Change physics mode and remove object from player control
     current_trash.stop_control()
     current_trash = null
-    
-    # Emit a signal to the main game for score keeping and spawning new trash
+
+    # Emit a signal to the main game
     emit_signal("trash_dropped")
 
+# Return true if the player controls a trash object right now
+func is_controlling_trash():
+    return current_trash != null
+
+# Returns true unless there are objects inside the spawn area (making it unsafe to spawn new objects)
+func is_spawn_area_clear():
+    var overlapping_bodies = $SpawnArea.get_overlapping_bodies()
+    return len(overlapping_bodies) == 0
 
 # Called when the player controlled trash was dropped because it collided with something
-func _on_Trash_dropped():
+func _on_Trash_touched_world():
     # Control was already stopped by the trash itself
-    print("[Player] Trash was dropped!")
+    print("[Player] Trash landed!")
     current_trash = null
-    
+
     # Emit a signal to the main game for score keeping and spawning new trash
-    emit_signal("trash_dropped")
+    emit_signal("trash_landed")
