@@ -1,0 +1,11 @@
+[gd_scene format=2]
+
+[node name="TrashBin" type="StaticBody2D"]
+
+[node name="CollisionPolygon2D" type="CollisionPolygon2D" parent="."]
+polygon = PoolVector2Array( -71, -182, -77, -1, 73, 0, 77, -184, 84, -184, 84, 9, -87, 11, -83, -183 )
+
+[node name="Polygon2D" type="Polygon2D" parent="."]
+position = Vector2( 3, -184 )
+scale = Vector2( 1, 1.33562 )
+polygon = PoolVector2Array( -74, 1, -80, 138, 70, 138, 74, 0, 80, 0, 80, 144, -90, 146, -85, 1 )
