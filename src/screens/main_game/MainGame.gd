@@ -29,10 +29,11 @@ var trash_kinds = [
 
 func _ready():
     randomizer.randomize()
+    spawn_player_trash()
 
 func _input(event):
-    # TODO: Only for testing. Spawning trash should be automatic
-    if event.is_action_pressed("ui_accept"):
+    # TODO: These are only debug shortcuts.
+    if event.is_action_pressed("debug_spawn_player"):
         spawn_player_trash()
 
 # Spawn new trash controlled by the player

@@ -7,7 +7,8 @@ signal trash_dropped
 signal trash_landed
 
 # Constants
-const TRASH_SPEED = 80
+const TRASH_SPEED_PLAYER = 200
+const TRASH_SPEED_DOWN = 100
 const TRASH_ROT_SPEED = 5
 
 # State variables
@@ -16,14 +17,14 @@ var current_trash: Trash = null
 
 func _process(delta):
     if current_trash:
-        if Input.is_action_just_pressed("player1_up"):
+        if Input.is_action_just_pressed("player1_drop"):
             drop_trash()
         else:
             process_movement_input()
 
 func process_movement_input():
     # Process player movement
-    var trash_direction = Vector2(0, 1)
+    var trash_direction = Vector2(0, 0)
     var trash_rotation = 0
 
     if Input.is_action_pressed("player1_left"):
@@ -41,8 +42,10 @@ func process_movement_input():
     if Input.is_action_pressed("player1_turn_ccw"):
         trash_rotation -= 1
 
+    var trash_velocity = trash_direction * TRASH_SPEED_PLAYER + Vector2(0, 1) * TRASH_SPEED_DOWN
+
     # Set movement vector (exact movement is processed by the trash object)
-    current_trash.move_by_player(trash_direction * TRASH_SPEED, trash_rotation * TRASH_ROT_SPEED)
+    current_trash.move_by_player(trash_velocity, trash_rotation * TRASH_ROT_SPEED)
 
 
 # Start controlling a piece of trash
