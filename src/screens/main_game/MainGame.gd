@@ -32,6 +32,10 @@ func _ready():
     spawn_player_trash()
 
 func _input(event):
+    # Exit the game with Escape
+    if event.is_action_pressed("ui_cancel"):
+        get_tree().quit()
+
     # TODO: These are only debug shortcuts.
     if event.is_action_pressed("debug_spawn_player"):
         spawn_player_trash()
