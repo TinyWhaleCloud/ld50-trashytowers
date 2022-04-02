@@ -1,0 +1,12 @@
+[gd_scene load_steps=3 format=2]
+
+[ext_resource path="res://objects/trash/Trash.tscn" type="PackedScene" id=1]
+[ext_resource path="res://objects/trash/kinds/crowbar/crowbar.png" type="Texture" id=2]
+
+[node name="Crowbar" instance=ExtResource( 1 )]
+
+[node name="Sprite" parent="." index="0"]
+texture = ExtResource( 2 )
+
+[node name="CollisionPolygon2D" type="CollisionPolygon2D" parent="." index="1"]
+polygon = PoolVector2Array( -23, -98, -16, -98, -15, -108, -6, -108, -5, -103, -5, 119, -8, 122, -8, 123, -2, 123, 7, 114, 6, -113, 3, -117, -19, -117, -23, -113 )
