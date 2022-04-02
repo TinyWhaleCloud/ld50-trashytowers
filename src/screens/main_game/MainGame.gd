@@ -78,3 +78,9 @@ func _on_Player_trash_landed():
 
     # TODO: Spawn new trash
     spawn_player_trash()
+
+# Called when a body entered the area above the floor
+func _on_FloorArea_body_entered(body):
+    if body is Trash:
+        # TODO: Implement game over
+        print("[MainGame] Trash landed on the floor! GAME OVER.")
