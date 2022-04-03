@@ -1,0 +1,15 @@
+[gd_scene load_steps=2 format=2]
+
+[sub_resource type="RectangleShape2D" id=2]
+extents = Vector2( 1200, 20 )
+
+[node name="Floor" type="StaticBody2D"]
+
+[node name="Line2D" type="Line2D" parent="."]
+position = Vector2( 0, 5 )
+points = PoolVector2Array( -1200, 0, 1200, 0 )
+default_color = Color( 0.4, 0.501961, 1, 1 )
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+position = Vector2( 0, 20 )
+shape = SubResource( 2 )
