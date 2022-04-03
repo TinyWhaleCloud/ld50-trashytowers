@@ -97,8 +97,8 @@ func _on_Trash_touched_world(trash):
     if current_trash == trash:
         current_trash = null
 
-        # Emit a signal to the main game for score keeping and spawning new trash
-        emit_signal("trash_landed")
+    # Emit a signal to the main game for score keeping and spawning new trash
+    emit_signal("trash_landed")
 
 # Called when the retry timer expires
 func _on_SpawnRetryTimer_timeout():
