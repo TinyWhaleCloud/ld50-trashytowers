@@ -10,6 +10,8 @@ onready var settings := get_node("/root/Settings") as Settings
 
 func _ready() -> void:
     emit_signal("next_turn")
+    if settings.music_enabled:
+        $MusicPlayer.play()
 
 func _input(event: InputEvent) -> void:
     # Return to the title screen with Escape
@@ -57,6 +59,7 @@ func player_game_over() -> void:
         return
 
     # Stop control, drop any trash
+    $MusicPlayer.stop()
     $Player.game_over = true
     $Player.drop_trash()
     hud.show_game_over()

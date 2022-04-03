@@ -1,0 +1,21 @@
+[remap]
+
+importer="wav"
+type="AudioStreamSample"
+path="res://.import/TrashyTowersMainMenu.wav-a1543b8ce3a2639cf9a0a5d837a21ae2.sample"
+
+[deps]
+
+source_file="res://screens/title_screen/TrashyTowersMainMenu.wav"
+dest_files=[ "res://.import/TrashyTowersMainMenu.wav-a1543b8ce3a2639cf9a0a5d837a21ae2.sample" ]
+
+[params]
+
+force/8_bit=false
+force/mono=false
+force/max_rate=false
+force/max_rate_hz=44100
+edit/trim=false
+edit/normalize=false
+edit/loop=true
+compress/mode=0
