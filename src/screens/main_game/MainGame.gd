@@ -42,15 +42,20 @@ func _input(event):
 
 # Spawn new trash controlled by the player
 func spawn_player_trash():
+    # Don't spawn new objects if the player has already lost the game
+    if $Player.game_over:
+        prints(self, "Cannot spawn: Player has already lost!")
+        return
+
     # Don't spawn new object if player is still controlling one
     if $Player.is_controlling_trash():
-        print("[MainGame] Player is already controlling an object.")
+        prints(self, "Player is already controlling an object.")
         return
 
     # Ensure that spawning is safe (i.e. the spawn area is clear)
     if not $Player.is_spawn_area_clear():
         # Retry spawning after a second using a timer
-        print("[MainGame] Spawn area of player is not clear! Delaying spawn...")
+        prints(self, "Spawn area of player is not clear! Delaying spawn...")
         $Player/SpawnRetryTimer.start(1)
         return
 
@@ -64,29 +69,35 @@ func spawn_player_trash():
     # Add trash to the scene
     add_child(new_trash)
 
-# Drop the trash the player is controlling
-func drop_player_trash():
-    $Player.drop_trash()
+# Stop player from controlling objects and show game over screen
+func player_game_over():
+    # Stop control, drop any trash
+    $Player.game_over = true
+    $Player.drop_trash(false)
+    $HUD.show_game_over()
 
 # Called when the player (voluntarily) dropped a trash object
 func _on_Player_trash_dropped():
-    print("[MainGame] Player dropped the trash!")
+    prints(self, "Player dropped the trash!")
 
 # Called when the player controlled trash landed (i.e. collided with the world)
 func _on_Player_trash_landed():
     # TODO: Check WHERE the trash landed
-    print("[MainGame] Trash has landed!")
+    prints(self, "Trash has landed!")
 
-    # TODO: Spawn new trash
+    # Spawn new trash
     spawn_player_trash()
 
 # Called when a body entered the area above the floor
 func _on_FloorArea_body_entered(body):
     if body is Trash:
-        # TODO: Implement game over
-        print("[MainGame] Trash landed on the floor! GAME OVER.")
+        player_game_over()
 
 # Called when the player's spawn retry timer expired
 func _on_Player_retry_spawn():
-    print("[MainGame] Retry spawning...")
+    prints(self, "Retry spawning...")
     spawn_player_trash()
+
+# Called when the player's score has changed
+func _on_Player_score_changed(new_score):
+    $HUD.set_player_score(new_score)
