@@ -7,6 +7,8 @@ signal trash_dropped
 signal trash_landed
 # Emitted when the spawn retry timer expired
 signal retry_spawn
+# Emitted when the score has changed
+signal score_changed(new_score)
 
 # Constants
 const TRASH_SPEED_PLAYER = 200
@@ -15,7 +17,11 @@ const TRASH_SPEED_DROP = 400
 const TRASH_ROT_SPEED = 5
 
 # State variables
+var game_over: bool = false
 var current_trash: Trash = null
+
+# Score
+var current_score: int = 0
 
 
 func _process(delta):
@@ -57,7 +63,7 @@ func take_trash(trash):
     if current_trash:
         drop_trash()
 
-    print("[Player] Take trash")
+    prints(self, "Take trash")
 
     # Take control of the trash
     current_trash = trash
@@ -65,11 +71,11 @@ func take_trash(trash):
     current_trash.connect("touched_world", self, "_on_Trash_touched_world", [trash])
 
 # Drop the trash the player is controlling (voluntary drop)
-func drop_trash():
+func drop_trash(accelerate_fall: bool = true):
     if not current_trash:
         return
 
-    print("[Player] Drop trash")
+    prints(self, "Drop trash")
 
     # Remove object from player control and speed up the fall a bit
     current_trash.stop_control()
@@ -88,14 +94,29 @@ func is_spawn_area_clear():
     var overlapping_bodies = $SpawnArea.get_overlapping_bodies()
     return len(overlapping_bodies) == 0
 
+# Add points to the player's score
+func add_score(points: int):
+    current_score += points
+    prints(self, "New score:", current_score)
+    emit_signal("score_changed", current_score)
+
+
 # Called when the player controlled trash was dropped because it collided with something
-func _on_Trash_touched_world(trash):
+func _on_Trash_touched_world(touched_body: Node, trash: Trash):
     # Control was already stopped by the trash itself
-    print("[Player] Trash landed!")
+    prints(self, "Trash landed!")
 
     # Stop controlling the trash
     if current_trash == trash:
         current_trash = null
+
+    # Avoid signal repetition
+    if trash.is_connected("touched_world", self, "_on_Trash_touched_world"):
+        trash.disconnect("touched_world", self, "_on_Trash_touched_world")
+
+    # Add a point to the player's score
+    if not game_over and touched_body.name != "Floor":
+        add_score(1)
 
     # Emit a signal to the main game for score keeping and spawning new trash
     emit_signal("trash_landed")

@@ -2,7 +2,7 @@ class_name Trash
 extends RigidBody2D
 
 # Emitted when the trash object touched something and thus the player lost control
-signal touched_world
+signal touched_world(body)
 
 # State variables
 var has_landed: bool = false
@@ -31,4 +31,4 @@ func _on_Trash_body_entered(body):
     if not has_landed:
         has_landed = true
         stop_control()
-        emit_signal("touched_world")
+        emit_signal("touched_world", body)
