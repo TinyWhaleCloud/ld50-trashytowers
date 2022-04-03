@@ -33,13 +33,19 @@ _global_script_classes=[ {
 "class": "TrashBin",
 "language": "GDScript",
 "path": "res://objects/trash_bin/TrashBin.gd"
+}, {
+"base": "Node",
+"class": "TrashSpawner",
+"language": "GDScript",
+"path": "res://objects/trash/TrashSpawner.gd"
 } ]
 _global_script_class_icons={
 "Floor": "",
 "HUD": "",
 "Player": "",
 "Trash": "",
-"TrashBin": ""
+"TrashBin": "",
+"TrashSpawner": ""
 }
 
 [application]

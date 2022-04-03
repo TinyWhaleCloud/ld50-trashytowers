@@ -1,4 +1,4 @@
-[gd_scene load_steps=7 format=2]
+[gd_scene load_steps=8 format=2]
 
 [ext_resource path="res://screens/main_game/MainGame.gd" type="Script" id=1]
 [ext_resource path="res://objects/trash_bin/TrashBin.tscn" type="PackedScene" id=2]
@@ -6,6 +6,7 @@
 [ext_resource path="res://ui/hud/HUD.tscn" type="PackedScene" id=4]
 [ext_resource path="res://objects/floor/Floor.tscn" type="PackedScene" id=5]
 [ext_resource path="res://screens/main_game/gameover.wav" type="AudioStream" id=6]
+[ext_resource path="res://objects/trash/TrashSpawner.tscn" type="PackedScene" id=7]
 
 [node name="MainGame" type="Node2D"]
 script = ExtResource( 1 )
@@ -16,11 +17,13 @@ script = ExtResource( 1 )
 position = Vector2( 640, 710 )
 scale = Vector2( 0.5, 0.5 )
 
-[node name="Player" parent="." instance=ExtResource( 3 )]
-position = Vector2( 640, 0 )
-
 [node name="Floor" parent="." instance=ExtResource( 5 )]
 position = Vector2( 640, 710 )
+
+[node name="TrashSpawner" parent="." instance=ExtResource( 7 )]
+
+[node name="Player" parent="." instance=ExtResource( 3 )]
+position = Vector2( 640, 0 )
 
 [node name="GameOverPlayer" type="AudioStreamPlayer" parent="."]
 stream = ExtResource( 6 )

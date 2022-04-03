@@ -5,27 +5,11 @@ signal next_turn
 
 # Node references
 onready var hud := $HUD as HUD
+onready var trash_spawner := $TrashSpawner as TrashSpawner
 onready var settings := get_node("/root/Settings") as Settings
 
-var randomizer := RandomNumberGenerator.new()
-
-# Packed scenes
-var trash_kinds = [
-    preload("res://objects/trash/kinds/basketball/Basketball.tscn"),
-    preload("res://objects/trash/kinds/bodyspray/Bodyspray.tscn"),
-    preload("res://objects/trash/kinds/crowbar/Crowbar.tscn"),
-    preload("res://objects/trash/kinds/energydrink/Energydrink.tscn"),
-    preload("res://objects/trash/kinds/ugly_monkey_picture/UglyMonkeyPicture.tscn"),
-    preload("res://objects/trash/kinds/minidisk/Minidisk.tscn"),
-    preload("res://objects/trash/kinds/nondescriptpackaging/Nondescriptpackaging.tscn"),
-    preload("res://objects/trash/kinds/phone/Phone.tscn"),
-    preload("res://objects/trash/kinds/shampoobottle/ShampooBottle.tscn"),
-    preload("res://objects/trash/kinds/waterbottle/WaterBottle.tscn"),
-]
-
 func _ready() -> void:
-    randomizer.randomize()
-    spawn_player_trash()
+    emit_signal("next_turn")
 
 func _input(event: InputEvent) -> void:
     # Return to the title screen with Escape
@@ -35,10 +19,6 @@ func _input(event: InputEvent) -> void:
     # TODO: These are only debug shortcuts.
     if event.is_action_pressed("debug_spawn_player"):
         spawn_player_trash()
-
-# Generates a new random trash instance
-func generate_trash() -> Trash:
-    return trash_kinds[randomizer.randi_range(0, trash_kinds.size() -1)].instance()
 
 # Spawn new trash controlled by the player
 func spawn_player_trash() -> void:
@@ -60,8 +40,7 @@ func spawn_player_trash() -> void:
         return
 
     # Create new trash object
-    var new_trash := generate_trash()
-    new_trash.position = $Player/SpawnPosition.global_position
+    var new_trash := trash_spawner.generate_trash($Player/SpawnPosition.global_position)
     new_trash.connect("touched_anything", self, "_on_Trash_touched_anything")
     new_trash.connect("touched_trash_bin", self, "_on_Trash_touched_trash_bin")
     new_trash.connect("touched_floor", self, "_on_Trash_touched_floor")
