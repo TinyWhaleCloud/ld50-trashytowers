@@ -1,7 +1,8 @@
-[gd_scene load_steps=4 format=2]
+[gd_scene load_steps=5 format=2]
 
 [ext_resource path="res://objects/trash/Trash.tscn" type="PackedScene" id=1]
 [ext_resource path="res://objects/trash/kinds/bodyspray/bodyspray.png" type="Texture" id=2]
+[ext_resource path="res://objects/trash/kinds/bodyspray/bodysprayDrop.wav" type="AudioStream" id=3]
 
 [sub_resource type="PhysicsMaterial" id=1]
 friction = 0.9
@@ -16,3 +17,6 @@ texture = ExtResource( 2 )
 
 [node name="CollisionPolygon2D" type="CollisionPolygon2D" parent="." index="1"]
 polygon = PoolVector2Array( -45, -23, 46, -24, 49, -18, 62, -18, 62, 16, 50, 16, 49, 21, 45, 25, -45, 25, -49, 22, -49, -21 )
+
+[node name="AudioStreamPlayer" parent="." index="2"]
+stream = ExtResource( 3 )
