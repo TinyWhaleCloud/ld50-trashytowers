@@ -1,4 +1,4 @@
-[gd_scene load_steps=8 format=2]
+[gd_scene load_steps=7 format=2]
 
 [ext_resource path="res://screens/main_game/MainGame.gd" type="Script" id=1]
 [ext_resource path="res://objects/trash_bin/TrashBin.tscn" type="PackedScene" id=2]
@@ -6,9 +6,6 @@
 [ext_resource path="res://ui/hud/HUD.tscn" type="PackedScene" id=4]
 [ext_resource path="res://objects/floor/Floor.tscn" type="PackedScene" id=5]
 [ext_resource path="res://screens/main_game/gameover.wav" type="AudioStream" id=6]
-
-[sub_resource type="RectangleShape2D" id=1]
-extents = Vector2( 800, 40 )
 
 [node name="MainGame" type="Node2D"]
 script = ExtResource( 1 )
@@ -22,25 +19,12 @@ scale = Vector2( 0.5, 0.5 )
 [node name="Player" parent="." instance=ExtResource( 3 )]
 position = Vector2( 640, 0 )
 
-[node name="FloorArea" type="Area2D" parent="."]
-position = Vector2( 640, 720 )
-
-[node name="CollisionShapeLeft" type="CollisionShape2D" parent="FloorArea"]
-position = Vector2( -946, -40 )
-shape = SubResource( 1 )
-
-[node name="CollisionShapeRight" type="CollisionShape2D" parent="FloorArea"]
-position = Vector2( 944, -40 )
-shape = SubResource( 1 )
-
 [node name="Floor" parent="." instance=ExtResource( 5 )]
 position = Vector2( 640, 710 )
 
 [node name="GameOverPlayer" type="AudioStreamPlayer" parent="."]
 stream = ExtResource( 6 )
 
+[connection signal="next_turn" from="." to="." method="_on_MainGame_next_turn" flags=3]
 [connection signal="retry_spawn" from="Player" to="." method="_on_Player_retry_spawn"]
 [connection signal="score_changed" from="Player" to="." method="_on_Player_score_changed"]
-[connection signal="trash_dropped" from="Player" to="." method="_on_Player_trash_dropped"]
-[connection signal="trash_landed" from="Player" to="." method="_on_Player_trash_landed"]
-[connection signal="body_entered" from="FloorArea" to="." method="_on_FloorArea_body_entered"]

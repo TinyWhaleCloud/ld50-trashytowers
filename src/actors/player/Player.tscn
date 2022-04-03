@@ -19,5 +19,4 @@ shape = SubResource( 1 )
 [node name="SpawnRetryTimer" type="Timer" parent="."]
 one_shot = true
 
-[connection signal="trash_landed" from="." to="." method="_on_Player_trash_landed"]
 [connection signal="timeout" from="SpawnRetryTimer" to="." method="_on_SpawnRetryTimer_timeout"]

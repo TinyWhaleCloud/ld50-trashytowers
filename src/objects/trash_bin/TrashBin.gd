@@ -1,0 +1,2 @@
+class_name TrashBin
+extends StaticBody2D

@@ -3,8 +3,6 @@ extends Node2D
 
 # Emitted when the player dropped a trash object (i.e. let go of it)
 signal trash_dropped
-# Emitted when the player controlled trash collided with something and the player lost control
-signal trash_landed
 # Emitted when the spawn retry timer expired
 signal retry_spawn
 # Emitted when the score has changed
@@ -27,7 +25,7 @@ var current_score: int = 0
 func _process(delta):
     if current_trash:
         if Input.is_action_just_pressed("player1_drop"):
-            drop_trash()
+            drop_trash(true)
         else:
             process_movement_input()
 
@@ -68,7 +66,6 @@ func take_trash(trash):
     # Take control of the trash
     current_trash = trash
     current_trash.start_control()
-    current_trash.connect("touched_world", self, "_on_Trash_touched_world", [trash])
 
 # Drop the trash the player is controlling (voluntary drop)
 func drop_trash(accelerate_fall: bool = true):
@@ -99,27 +96,6 @@ func add_score(points: int):
     current_score += points
     prints(self, "New score:", current_score)
     emit_signal("score_changed", current_score)
-
-
-# Called when the player controlled trash was dropped because it collided with something
-func _on_Trash_touched_world(touched_body: Node, trash: Trash):
-    # Control was already stopped by the trash itself
-    prints(self, "Trash landed!")
-
-    # Stop controlling the trash
-    if current_trash == trash:
-        current_trash = null
-
-    # Avoid signal repetition
-    if trash.is_connected("touched_world", self, "_on_Trash_touched_world"):
-        trash.disconnect("touched_world", self, "_on_Trash_touched_world")
-
-    # Add a point to the player's score
-    if not game_over and touched_body.name != "Floor":
-        add_score(1)
-
-    # Emit a signal to the main game for score keeping and spawning new trash
-    emit_signal("trash_landed")
 
 # Called when the retry timer expires
 func _on_SpawnRetryTimer_timeout():
