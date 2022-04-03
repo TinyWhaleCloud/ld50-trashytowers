@@ -5,7 +5,9 @@
 [node name="TrashBin" type="StaticBody2D"]
 
 [node name="CollisionPolygon2D" type="CollisionPolygon2D" parent="."]
+position = Vector2( 0, -320 )
 polygon = PoolVector2Array( -285, -294, -240, 303, 234, 301, 294, -295, 306, -295, 248, 320, -254, 323, -303, -295 )
 
 [node name="Sprite" type="Sprite" parent="."]
 texture = ExtResource( 1 )
+offset = Vector2( 0, -320 )

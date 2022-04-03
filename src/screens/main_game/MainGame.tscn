@@ -4,13 +4,11 @@
 [ext_resource path="res://objects/trash_bin/TrashBin.tscn" type="PackedScene" id=2]
 [ext_resource path="res://actors/player/Player.tscn" type="PackedScene" id=3]
 [ext_resource path="res://ui/hud/HUD.tscn" type="PackedScene" id=4]
-[ext_resource path="res://screens/main_game/gameover.wav" type="AudioStream" id=5]
+[ext_resource path="res://objects/floor/Floor.tscn" type="PackedScene" id=5]
+[ext_resource path="res://screens/main_game/gameover.wav" type="AudioStream" id=6]
 
 [sub_resource type="RectangleShape2D" id=1]
-extents = Vector2( 800, 60 )
-
-[sub_resource type="RectangleShape2D" id=2]
-extents = Vector2( 1200, 20 )
+extents = Vector2( 800, 40 )
 
 [node name="MainGame" type="Node2D"]
 script = ExtResource( 1 )
@@ -18,35 +16,28 @@ script = ExtResource( 1 )
 [node name="HUD" parent="." instance=ExtResource( 4 )]
 
 [node name="TrashBin" parent="." instance=ExtResource( 2 )]
-position = Vector2( 960, 755 )
+position = Vector2( 640, 710 )
+scale = Vector2( 0.5, 0.5 )
 
 [node name="Player" parent="." instance=ExtResource( 3 )]
-position = Vector2( 960, 68 )
+position = Vector2( 640, 0 )
 
 [node name="FloorArea" type="Area2D" parent="."]
-position = Vector2( 960, 1080 )
+position = Vector2( 640, 720 )
 
 [node name="CollisionShapeLeft" type="CollisionShape2D" parent="FloorArea"]
-position = Vector2( -1075, -60 )
+position = Vector2( -946, -40 )
 shape = SubResource( 1 )
 
 [node name="CollisionShapeRight" type="CollisionShape2D" parent="FloorArea"]
-position = Vector2( 1070, -60 )
+position = Vector2( 944, -40 )
 shape = SubResource( 1 )
 
-[node name="Floor" type="StaticBody2D" parent="."]
-position = Vector2( 960, 1080 )
-
-[node name="Line2D" type="Line2D" parent="Floor"]
-points = PoolVector2Array( -1200, 0, 1200, 0 )
-default_color = Color( 0.4, 0.501961, 1, 1 )
-
-[node name="CollisionShape2D" type="CollisionShape2D" parent="Floor"]
-position = Vector2( 0, 10 )
-shape = SubResource( 2 )
+[node name="Floor" parent="." instance=ExtResource( 5 )]
+position = Vector2( 640, 710 )
 
 [node name="GameOverPlayer" type="AudioStreamPlayer" parent="."]
-stream = ExtResource( 5 )
+stream = ExtResource( 6 )
 
 [connection signal="retry_spawn" from="Player" to="." method="_on_Player_retry_spawn"]
 [connection signal="score_changed" from="Player" to="." method="_on_Player_score_changed"]
