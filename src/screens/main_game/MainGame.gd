@@ -49,8 +49,9 @@ func spawn_player_trash():
 
     # Ensure that spawning is safe (i.e. the spawn area is clear)
     if not $Player.is_spawn_area_clear():
+        # Retry spawning after a second using a timer
         print("[MainGame] Spawn area of player is not clear! Delaying spawn...")
-        # TODO: retry
+        $Player/SpawnRetryTimer.start(1)
         return
 
     # Create new trash object
@@ -69,11 +70,7 @@ func drop_player_trash():
 
 # Called when the player (voluntarily) dropped a trash object
 func _on_Player_trash_dropped():
-    # TODO: Check WHERE the trash was dropped
     print("[MainGame] Player dropped the trash!")
-
-    # TODO: Spawn new trash
-    #spawn_player_trash()
 
 # Called when the player controlled trash landed (i.e. collided with the world)
 func _on_Player_trash_landed():
@@ -88,3 +85,8 @@ func _on_FloorArea_body_entered(body):
     if body is Trash:
         # TODO: Implement game over
         print("[MainGame] Trash landed on the floor! GAME OVER.")
+
+# Called when the player's spawn retry timer expired
+func _on_Player_retry_spawn():
+    print("[MainGame] Retry spawning...")
+    spawn_player_trash()

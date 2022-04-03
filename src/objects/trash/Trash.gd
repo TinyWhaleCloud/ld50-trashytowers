@@ -29,6 +29,6 @@ func move_by_player(new_velocity: Vector2, new_rotation: float):
 func _on_Trash_body_entered(body):
     # Some collision occured. Drop the trash.
     if not has_landed:
+        has_landed = true
         stop_control()
         emit_signal("touched_world")
-        has_landed = true

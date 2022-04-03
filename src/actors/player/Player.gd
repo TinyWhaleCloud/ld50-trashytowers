@@ -5,6 +5,8 @@ extends Node2D
 signal trash_dropped
 # Emitted when the player controlled trash collided with something and the player lost control
 signal trash_landed
+# Emitted when the spawn retry timer expired
+signal retry_spawn
 
 # Constants
 const TRASH_SPEED_PLAYER = 200
@@ -58,11 +60,11 @@ func take_trash(trash):
     print("[Player] Take trash")
 
     # Take control of the trash
-    trash.start_control()
-    trash.connect("touched_world", self, "_on_Trash_touched_world")
     current_trash = trash
+    current_trash.start_control()
+    current_trash.connect("touched_world", self, "_on_Trash_touched_world", [trash])
 
-# Drop the trash the player is controlling
+# Drop the trash the player is controlling (voluntary drop)
 func drop_trash():
     if not current_trash:
         return
@@ -87,10 +89,19 @@ func is_spawn_area_clear():
     return len(overlapping_bodies) == 0
 
 # Called when the player controlled trash was dropped because it collided with something
-func _on_Trash_touched_world():
+func _on_Trash_touched_world(trash):
     # Control was already stopped by the trash itself
     print("[Player] Trash landed!")
-    current_trash = null
 
-    # Emit a signal to the main game for score keeping and spawning new trash
-    emit_signal("trash_landed")
+    # Stop controlling the trash
+    if current_trash == trash:
+        current_trash = null
+
+        # Emit a signal to the main game for score keeping and spawning new trash
+        emit_signal("trash_landed")
+
+# Called when the retry timer expires
+func _on_SpawnRetryTimer_timeout():
+    # Ignore timer when already controlling an object
+    if not current_trash:
+        emit_signal("retry_spawn")
