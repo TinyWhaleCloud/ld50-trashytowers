@@ -5,6 +5,9 @@ onready var settings := get_node("/root/Settings") as Settings
 
 func _ready() -> void:
     $SoundEffectsChecked.pressed = settings.sfx_enabled
+    $MusicEnabled.pressed = settings.music_enabled
+    if settings.music_enabled:
+        $TitleMusicPlayer.play()
 
 func _input(event: InputEvent) -> void:
     # Exit the game with Escape
@@ -24,3 +27,11 @@ func start_game() -> void:
 
 func _on_SoundEffectsChecked_toggled(button_pressed: bool) -> void:
     settings.sfx_enabled = button_pressed
+
+
+func _on_MusicEnabled_toggled(button_pressed:bool):
+    settings.music_enabled = button_pressed
+    if button_pressed:
+        $TitleMusicPlayer.play()
+    else:
+        $TitleMusicPlayer.stop()
