@@ -15,24 +15,24 @@ const TRASH_SPEED_DROP = 400
 const TRASH_ROT_SPEED = 5
 
 # State variables
-var game_over: bool = false
+var game_over := false
 var current_trash: Trash = null
 
 # Score
-var current_score: int = 0
+var current_score := 0
 
 
-func _process(delta):
+func _process(delta) -> void:
     if current_trash:
         if Input.is_action_just_pressed("player1_drop"):
             drop_trash(true)
         else:
             process_movement_input()
 
-func process_movement_input():
+func process_movement_input() -> void:
     # Process player movement
-    var trash_direction = Vector2(0, 0)
-    var trash_rotation = 0
+    var trash_direction := Vector2(0, 0)
+    var trash_rotation := 0
 
     if Input.is_action_pressed("player1_left"):
         trash_direction.x -= 1
@@ -49,14 +49,14 @@ func process_movement_input():
     if Input.is_action_pressed("player1_turn_ccw"):
         trash_rotation -= 1
 
-    var trash_velocity = trash_direction * TRASH_SPEED_PLAYER + Vector2(0, 1) * TRASH_SPEED_DOWN
+    var trash_velocity := trash_direction * TRASH_SPEED_PLAYER + Vector2(0, 1) * TRASH_SPEED_DOWN
 
     # Set movement vector (exact movement is processed by the trash object)
     current_trash.move_by_player(trash_velocity, trash_rotation * TRASH_ROT_SPEED)
 
 
 # Start controlling a piece of trash
-func take_trash(trash):
+func take_trash(trash: Trash) -> void:
     # If the player is still controlling an object, drop it
     if current_trash:
         drop_trash()
@@ -68,7 +68,7 @@ func take_trash(trash):
     current_trash.start_control()
 
 # Drop the trash the player is controlling (voluntary drop)
-func drop_trash(accelerate_fall: bool = true):
+func drop_trash(accelerate_fall := false) -> void:
     if not current_trash:
         return
 
@@ -83,22 +83,22 @@ func drop_trash(accelerate_fall: bool = true):
     emit_signal("trash_dropped")
 
 # Return true if the player controls a trash object right now
-func is_controlling_trash():
+func is_controlling_trash() -> bool:
     return current_trash != null
 
 # Returns true unless there are objects inside the spawn area (making it unsafe to spawn new objects)
-func is_spawn_area_clear():
-    var overlapping_bodies = $SpawnArea.get_overlapping_bodies()
+func is_spawn_area_clear() -> bool:
+    var overlapping_bodies := ($SpawnArea as Area2D).get_overlapping_bodies()
     return len(overlapping_bodies) == 0
 
 # Add points to the player's score
-func add_score(points: int):
+func add_score(points: int) -> void:
     current_score += points
     prints(self, "New score:", current_score)
     emit_signal("score_changed", current_score)
 
 # Called when the retry timer expires
-func _on_SpawnRetryTimer_timeout():
+func _on_SpawnRetryTimer_timeout() -> void:
     # Ignore timer when already controlling an object
     if not current_trash:
         emit_signal("retry_spawn")

@@ -18,24 +18,24 @@ var player_rotation := 0
 
 onready var settings := get_node("/root/Settings") as Settings
 
-func _integrate_forces(state):
+func _integrate_forces(state) -> void:
     if player_controlled:
         linear_velocity = player_velocity
         angular_velocity = player_rotation
 
-func start_control():
+func start_control() -> void:
     player_controlled = true
     player_velocity = Vector2(0, 0)
 
-func stop_control():
+func stop_control() -> void:
     player_controlled = false
 
-func move_by_player(new_velocity: Vector2, new_rotation: float):
+func move_by_player(new_velocity: Vector2, new_rotation: float) -> void:
     player_velocity = new_velocity
     player_rotation = new_rotation
 
 # Called when a collision with another body happens
-func _on_Trash_body_entered(body):
+func _on_Trash_body_entered(body: Node) -> void:
     var play_sound := false
 
     # If the player is still controlling the trash, the trash should be dropped automatically

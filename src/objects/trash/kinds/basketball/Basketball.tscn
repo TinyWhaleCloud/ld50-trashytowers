@@ -13,6 +13,7 @@ radius = 64.1249
 [node name="Basketball" instance=ExtResource( 2 )]
 mass = 2.0
 physics_material_override = SubResource( 2 )
+script = null
 
 [node name="Sprite" parent="." index="0"]
 texture = ExtResource( 1 )

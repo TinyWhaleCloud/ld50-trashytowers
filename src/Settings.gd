@@ -1,3 +1,3 @@
 extends Node
 
-var sfx_enabled = true
+var sfx_enabled := true

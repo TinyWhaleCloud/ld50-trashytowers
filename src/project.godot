@@ -9,11 +9,6 @@
 config_version=4
 
 _global_script_classes=[ {
-"base": "Trash",
-"class": "Basketball",
-"language": "GDScript",
-"path": "res://objects/trash/kinds/basketball/Basketball.gd"
-}, {
 "base": "StaticBody2D",
 "class": "Floor",
 "language": "GDScript",
@@ -40,7 +35,6 @@ _global_script_classes=[ {
 "path": "res://objects/trash_bin/TrashBin.gd"
 } ]
 _global_script_class_icons={
-"Basketball": "",
 "Floor": "",
 "HUD": "",
 "Player": "",
