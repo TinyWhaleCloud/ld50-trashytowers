@@ -6,6 +6,11 @@ onready var settings := get_node("/root/Settings") as Settings
 func _ready() -> void:
     $SoundEffectsChecked.pressed = settings.sfx_enabled
 
+func _input(event: InputEvent) -> void:
+    # Exit the game with Escape
+    if event.is_action_pressed("ui_cancel"):
+        get_tree().quit()
+
 func _on_StartButton_pressed() -> void:
     start_game()
 

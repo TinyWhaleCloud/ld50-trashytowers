@@ -28,9 +28,9 @@ func _ready() -> void:
     spawn_player_trash()
 
 func _input(event: InputEvent) -> void:
-    # Exit the game with Escape
+    # Return to the title screen with Escape
     if event.is_action_pressed("ui_cancel"):
-        get_tree().quit()
+        get_tree().change_scene_to(load("res://screens/title_screen/TitleScreen.tscn"))
 
     # TODO: These are only debug shortcuts.
     if event.is_action_pressed("debug_spawn_player"):
