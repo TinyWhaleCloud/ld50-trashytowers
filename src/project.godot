@@ -127,7 +127,7 @@ debug_spawn_player={
 [physics]
 
 common/enable_pause_aware_picking=true
-2d/default_gravity=200
+2d/default_gravity=400
 
 [rendering]
 

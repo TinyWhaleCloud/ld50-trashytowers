@@ -9,6 +9,7 @@ signal trash_landed
 # Constants
 const TRASH_SPEED_PLAYER = 200
 const TRASH_SPEED_DOWN = 100
+const TRASH_SPEED_DROP = 400
 const TRASH_ROT_SPEED = 5
 
 # State variables
@@ -68,8 +69,9 @@ func drop_trash():
 
     print("[Player] Drop trash")
 
-    # Change physics mode and remove object from player control
+    # Remove object from player control and speed up the fall a bit
     current_trash.stop_control()
+    current_trash.apply_impulse(Vector2(), Vector2(0, TRASH_SPEED_DROP))
     current_trash = null
 
     # Emit a signal to the main game
