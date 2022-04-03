@@ -9,10 +9,10 @@
 config_version=4
 
 _global_script_classes=[ {
-"base": "Trash",
-"class": "Basketball",
+"base": "StaticBody2D",
+"class": "Floor",
 "language": "GDScript",
-"path": "res://objects/trash/kinds/basketball/Basketball.gd"
+"path": "res://objects/floor/Floor.gd"
 }, {
 "base": "CanvasLayer",
 "class": "HUD",
@@ -28,12 +28,18 @@ _global_script_classes=[ {
 "class": "Trash",
 "language": "GDScript",
 "path": "res://objects/trash/Trash.gd"
+}, {
+"base": "StaticBody2D",
+"class": "TrashBin",
+"language": "GDScript",
+"path": "res://objects/trash_bin/TrashBin.gd"
 } ]
 _global_script_class_icons={
-"Basketball": "",
+"Floor": "",
 "HUD": "",
 "Player": "",
-"Trash": ""
+"Trash": "",
+"TrashBin": ""
 }
 
 [application]
