@@ -43,6 +43,10 @@ config/description="A Tricky Towers inspired game where you have to stack trash 
 run/main_scene="res://screens/title_screen/TitleScreen.tscn"
 config/icon="res://icon.png"
 
+[autoload]
+
+Settings="*res://Settings.gd"
+
 [display]
 
 window/size/width=1920

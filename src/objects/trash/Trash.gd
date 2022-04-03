@@ -9,6 +9,7 @@ var has_landed: bool = false
 var player_controlled: bool = false
 var player_velocity: Vector2 = Vector2(0, 0)
 var player_rotation: float = 0
+onready var settings = get_node("/root/Settings")
 
 func _integrate_forces(state):
     if player_controlled:
@@ -32,4 +33,5 @@ func _on_Trash_body_entered(body):
         has_landed = true
         stop_control()
         emit_signal("touched_world", body)
-        $AudioStreamPlayer.play()
+        if settings.sfx_enabled:
+            $AudioStreamPlayer.play()

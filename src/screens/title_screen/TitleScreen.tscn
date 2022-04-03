@@ -99,6 +99,20 @@ script = ExtResource( 13 )
 [node name="StartGameSoundPlayer" type="AudioStreamPlayer2D" parent="."]
 stream = ExtResource( 12 )
 
+[node name="SoundEffectsChecked" type="CheckButton" parent="."]
+margin_left = 51.0
+margin_top = 716.0
+margin_right = 360.0
+margin_bottom = 756.0
+custom_colors/font_color_disabled = Color( 1, 0, 1, 1 )
+custom_colors/font_color_focus = Color( 1, 0, 1, 1 )
+custom_colors/font_color_hover_pressed = Color( 1, 0, 1, 1 )
+custom_colors/font_color = Color( 1, 0, 1, 1 )
+custom_colors/font_color_hover = Color( 1, 0, 1, 1 )
+custom_colors/font_color_pressed = Color( 1, 0, 1, 1 )
+custom_fonts/font = ExtResource( 6 )
+text = "Sound effects"
+
 [connection signal="focus_entered" from="SinglePlayerButton" to="InfoText" method="_on_SinglePlayerButton_focus_entered"]
 [connection signal="focus_entered" from="SinglePlayerButton" to="SelectionSoundPlayer" method="_on_button_entered"]
 [connection signal="focus_exited" from="SinglePlayerButton" to="InfoText" method="_on_SinglePlayerButton_focus_exited"]
@@ -118,3 +132,4 @@ stream = ExtResource( 12 )
 [connection signal="mouse_entered" from="HotseatButton" to="InfoText" method="_on_HotseatButton_mouse_entered"]
 [connection signal="mouse_entered" from="HotseatButton" to="SelectionSoundPlayer" method="_on_button_entered"]
 [connection signal="mouse_exited" from="HotseatButton" to="InfoText" method="_on_HotseatButton_mouse_exited"]
+[connection signal="toggled" from="SoundEffectsChecked" to="." method="_on_SoundEffectsChecked_toggled"]
