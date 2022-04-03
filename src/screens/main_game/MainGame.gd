@@ -66,11 +66,11 @@ func spawn_player_trash() -> void:
     new_trash.connect("touched_trash_bin", self, "_on_Trash_touched_trash_bin")
     new_trash.connect("touched_floor", self, "_on_Trash_touched_floor")
 
-    # Let the player control the trash
-    $Player.take_trash(new_trash)
-
     # Add trash to the scene
     add_child(new_trash)
+
+    # Let the player control the trash
+    $Player.take_trash(new_trash)
 
 # Stop player from controlling objects and show game over screen
 func player_game_over() -> void:
