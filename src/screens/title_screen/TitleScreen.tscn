@@ -1,4 +1,4 @@
-[gd_scene load_steps=11 format=2]
+[gd_scene load_steps=14 format=2]
 
 [ext_resource path="res://screens/title_screen/TitleScreen.gd" type="Script" id=1]
 [ext_resource path="res://screens/title_screen/singleplayer.png" type="Texture" id=2]
@@ -10,6 +10,9 @@
 [ext_resource path="res://screens/title_screen/trashbags.png" type="Texture" id=8]
 [ext_resource path="res://screens/title_screen/brickwall.png" type="Texture" id=9]
 [ext_resource path="res://screens/title_screen/TextBg.tres" type="TileSet" id=10]
+[ext_resource path="res://screens/title_screen/selection.wav" type="AudioStream" id=11]
+[ext_resource path="res://screens/title_screen/start.wav" type="AudioStream" id=12]
+[ext_resource path="res://screens/title_screen/SelectionSoundPlayer.gd" type="Script" id=13]
 
 [node name="TitleScreen" type="Node2D"]
 script = ExtResource( 1 )
@@ -89,16 +92,44 @@ position = Vector2( 1032, 202 )
 scale = Vector2( 1.52534, 1.56078 )
 texture = ExtResource( 7 )
 
+[node name="SelectionSoundPlayer" type="AudioStreamPlayer" parent="."]
+stream = ExtResource( 11 )
+script = ExtResource( 13 )
+
+[node name="StartGameSoundPlayer" type="AudioStreamPlayer2D" parent="."]
+stream = ExtResource( 12 )
+
+[node name="SoundEffectsChecked" type="CheckButton" parent="."]
+margin_left = 51.0
+margin_top = 716.0
+margin_right = 360.0
+margin_bottom = 756.0
+custom_colors/font_color_disabled = Color( 1, 0, 1, 1 )
+custom_colors/font_color_focus = Color( 1, 0, 1, 1 )
+custom_colors/font_color_hover_pressed = Color( 1, 0, 1, 1 )
+custom_colors/font_color = Color( 1, 0, 1, 1 )
+custom_colors/font_color_hover = Color( 1, 0, 1, 1 )
+custom_colors/font_color_pressed = Color( 1, 0, 1, 1 )
+custom_fonts/font = ExtResource( 6 )
+text = "Sound effects"
+
 [connection signal="focus_entered" from="SinglePlayerButton" to="InfoText" method="_on_SinglePlayerButton_focus_entered"]
+[connection signal="focus_entered" from="SinglePlayerButton" to="SelectionSoundPlayer" method="_on_button_entered"]
 [connection signal="focus_exited" from="SinglePlayerButton" to="InfoText" method="_on_SinglePlayerButton_focus_exited"]
 [connection signal="mouse_entered" from="SinglePlayerButton" to="InfoText" method="_on_SinglePlayerButton_mouse_entered"]
+[connection signal="mouse_entered" from="SinglePlayerButton" to="SelectionSoundPlayer" method="_on_button_entered"]
 [connection signal="mouse_exited" from="SinglePlayerButton" to="InfoText" method="_on_SinglePlayerButton_mouse_exited"]
 [connection signal="pressed" from="SinglePlayerButton" to="." method="_on_StartButton_pressed"]
 [connection signal="focus_entered" from="ChaosButton" to="InfoText" method="_on_ChaosButton_focus_entered"]
+[connection signal="focus_entered" from="ChaosButton" to="SelectionSoundPlayer" method="_on_button_entered"]
 [connection signal="focus_exited" from="ChaosButton" to="InfoText" method="_on_ChaosButton_focus_exited"]
 [connection signal="mouse_entered" from="ChaosButton" to="InfoText" method="_on_ChaosButton_mouse_entered"]
+[connection signal="mouse_entered" from="ChaosButton" to="SelectionSoundPlayer" method="_on_button_entered"]
 [connection signal="mouse_exited" from="ChaosButton" to="InfoText" method="_on_ChaosButton_mouse_exited"]
 [connection signal="focus_entered" from="HotseatButton" to="InfoText" method="_on_HotseatButton_focus_entered"]
+[connection signal="focus_entered" from="HotseatButton" to="SelectionSoundPlayer" method="_on_button_entered"]
 [connection signal="focus_exited" from="HotseatButton" to="InfoText" method="_on_HotseatButton_focus_exited"]
 [connection signal="mouse_entered" from="HotseatButton" to="InfoText" method="_on_HotseatButton_mouse_entered"]
+[connection signal="mouse_entered" from="HotseatButton" to="SelectionSoundPlayer" method="_on_button_entered"]
 [connection signal="mouse_exited" from="HotseatButton" to="InfoText" method="_on_HotseatButton_mouse_exited"]
+[connection signal="toggled" from="SoundEffectsChecked" to="." method="_on_SoundEffectsChecked_toggled"]

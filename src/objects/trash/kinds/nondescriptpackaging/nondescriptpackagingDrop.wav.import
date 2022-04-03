@@ -1,0 +1,21 @@
+[remap]
+
+importer="wav"
+type="AudioStreamSample"
+path="res://.import/nondescriptpackagingDrop.wav-4a7327f9af1c2cae109bf15e1f123936.sample"
+
+[deps]
+
+source_file="res://objects/trash/kinds/nondescriptpackaging/nondescriptpackagingDrop.wav"
+dest_files=[ "res://.import/nondescriptpackagingDrop.wav-4a7327f9af1c2cae109bf15e1f123936.sample" ]
+
+[params]
+
+force/8_bit=false
+force/mono=false
+force/max_rate=false
+force/max_rate_hz=44100
+edit/trim=false
+edit/normalize=false
+edit/loop=false
+compress/mode=0

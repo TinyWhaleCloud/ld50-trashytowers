@@ -11,6 +11,7 @@ var nondescriptpackaging_scene = preload("res://objects/trash/kinds/nondescriptp
 var phone_scene = preload("res://objects/trash/kinds/phone/Phone.tscn")
 var shampoo_scene = preload("res://objects/trash/kinds/shampoobottle/ShampooBottle.tscn")
 var water_scene = preload("res://objects/trash/kinds/waterbottle/WaterBottle.tscn")
+onready var settings = get_node("/root/Settings")
 
 var randomizer = RandomNumberGenerator.new()
 
@@ -75,6 +76,8 @@ func player_game_over():
     $Player.game_over = true
     $Player.drop_trash(false)
     $HUD.show_game_over()
+    if settings.sfx_enabled:
+        $GameOverPlayer.play()
 
 # Called when the player (voluntarily) dropped a trash object
 func _on_Player_trash_dropped():
