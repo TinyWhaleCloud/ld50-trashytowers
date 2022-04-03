@@ -32,3 +32,4 @@ func _on_Trash_body_entered(body):
         has_landed = true
         stop_control()
         emit_signal("touched_world", body)
+        $AudioStreamPlayer.play()

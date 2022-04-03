@@ -7,4 +7,6 @@ func _on_StartButton_pressed():
 
 func start_game():
     print("Start game: Switch to MainGame scene")
+    $StartGameSoundPlayer.play()
+    yield($StartGameSoundPlayer, "finished")
     get_tree().change_scene_to(main_game_scene)
