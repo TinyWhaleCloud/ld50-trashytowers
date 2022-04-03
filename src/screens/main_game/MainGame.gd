@@ -72,6 +72,7 @@ func spawn_player_trash():
 # Stop player from controlling objects and show game over screen
 func player_game_over():
     # Stop control, drop any trash
+    $GameOverPlayer.play()
     $Player.game_over = true
     $Player.drop_trash(false)
     $HUD.show_game_over()

@@ -1,9 +1,10 @@
-[gd_scene load_steps=7 format=2]
+[gd_scene load_steps=8 format=2]
 
 [ext_resource path="res://screens/main_game/MainGame.gd" type="Script" id=1]
 [ext_resource path="res://objects/trash_bin/TrashBin.tscn" type="PackedScene" id=2]
 [ext_resource path="res://actors/player/Player.tscn" type="PackedScene" id=3]
 [ext_resource path="res://ui/hud/HUD.tscn" type="PackedScene" id=4]
+[ext_resource path="res://screens/main_game/gameover.wav" type="AudioStream" id=5]
 
 [sub_resource type="RectangleShape2D" id=1]
 extents = Vector2( 800, 60 )
@@ -43,6 +44,9 @@ default_color = Color( 0.4, 0.501961, 1, 1 )
 [node name="CollisionShape2D" type="CollisionShape2D" parent="Floor"]
 position = Vector2( 0, 10 )
 shape = SubResource( 2 )
+
+[node name="GameOverPlayer" type="AudioStreamPlayer" parent="."]
+stream = ExtResource( 5 )
 
 [connection signal="retry_spawn" from="Player" to="." method="_on_Player_retry_spawn"]
 [connection signal="score_changed" from="Player" to="." method="_on_Player_score_changed"]
