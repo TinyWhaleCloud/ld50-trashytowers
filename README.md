@@ -8,10 +8,7 @@ This game is playable with a keyboard or one or more gamepads.
 The native Linux build has some difficult to reproduce issues with the gamepad disconnecting.  
 If this happens, try the web build instead.
 
-<video src="./screenshots/singleplayer.webm">
-Your browser does not seem to support the video tag or .webm files.
-If it did, you would be seeing a short clip of someone playing the single player mode
-</video>
+![A screenshot of the main menu](./screenshots/main_menu.png)
 
 ## Setting
 
