@@ -47,10 +47,6 @@ func _input(event: InputEvent) -> void:
     if event.is_action_pressed("ui_cancel"):
         get_tree().change_scene_to(load("res://screens/title_screen/TitleScreen.tscn"))
 
-    # TODO: These are only debug shortcuts.
-    if event.is_action_pressed("debug_spawn_player"):
-        spawn_player_trash(current_player)
-
 
 # Setup the game (set game mode, create players etc.)
 func setup_game() -> void:
