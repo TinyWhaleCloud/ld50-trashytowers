@@ -4,7 +4,11 @@ A Tricky Towers inspired game where you have to stack trash with your roommates 
 
 Entry for the [Ludum Dare 50](https://ldjam.com/events/ludum-dare/50) with the theme "Delay the inevitable".
 
-## Settings
+This game is playable with a keyboard or one or more gamepads.  
+The native Linux build has some difficult to reproduce issues with the gamepad disconnecting.  
+If this happens, try the web build instead.
+
+## Setting
 
 Taking out the trash is a pretty annoying chore.  
 You've got to put on street clothes and go into this terrifying place called "outside".  
@@ -31,8 +35,8 @@ Whoever has dropped the last piece before the heap spills looses.
 **Hot tip**: If you see something moving after the other player has set it down, you can slow down your own trash
 falling.  
 If you don't their trash might land after yours does, and you lose the game.  
-Imagine this being a bit like when someone has put in something compressed that extends over time; if you happen to
-have thrown something in the trash before it's done extending, it will look like the spilling was your fault.
+Imagine this being a bit like when someone has put in something compressed that extends over time; if you happen to have
+thrown something in the trash before it's done extending, it will look like the spilling was your fault.
 
 ### Hotseat
 
