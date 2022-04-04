@@ -6,27 +6,53 @@
 [node name="HUD" type="CanvasLayer"]
 script = ExtResource( 1 )
 
-[node name="Player1ScoreLabel" type="Label" parent="."]
+[node name="Player1ScoreBox" type="VBoxContainer" parent="."]
 margin_left = 10.0
 margin_top = 10.0
-margin_right = 252.0
-margin_bottom = 40.0
-size_flags_horizontal = 3
-size_flags_vertical = 6
+
+[node name="PlayerLabel" type="Label" parent="Player1ScoreBox"]
+margin_right = 200.0
+margin_bottom = 30.0
+rect_min_size = Vector2( 200, 0 )
+custom_colors/font_color = Color( 0, 0, 0, 1 )
+custom_fonts/font = ExtResource( 2 )
+text = "Player 1"
+
+[node name="ScoreLabel" type="Label" parent="Player1ScoreBox"]
+margin_top = 34.0
+margin_right = 200.0
+margin_bottom = 64.0
+rect_min_size = Vector2( 200, 0 )
 custom_colors/font_color = Color( 0, 0, 0, 1 )
 custom_fonts/font = ExtResource( 2 )
 text = "Score: 0"
 
-[node name="Player2ScoreLabel" type="Label" parent="."]
-margin_left = 9.0
-margin_top = 44.0
-margin_right = 251.0
-margin_bottom = 74.0
-size_flags_horizontal = 3
-size_flags_vertical = 6
+[node name="Player2ScoreBox" type="VBoxContainer" parent="."]
+anchor_left = 1.0
+anchor_right = 1.0
+margin_top = 10.0
+margin_right = -10.0
+grow_horizontal = 0
+rect_min_size = Vector2( 120, 0 )
+
+[node name="PlayerLabel" type="Label" parent="Player2ScoreBox"]
+margin_right = 200.0
+margin_bottom = 30.0
+rect_min_size = Vector2( 200, 0 )
+custom_colors/font_color = Color( 0, 0, 0, 1 )
+custom_fonts/font = ExtResource( 2 )
+text = "Player 2"
+align = 2
+
+[node name="ScoreLabel" type="Label" parent="Player2ScoreBox"]
+margin_top = 34.0
+margin_right = 200.0
+margin_bottom = 64.0
+rect_min_size = Vector2( 200, 0 )
 custom_colors/font_color = Color( 0, 0, 0, 1 )
 custom_fonts/font = ExtResource( 2 )
 text = "Score: 0"
+align = 2
 
 [node name="GameOverScreen" type="Panel" parent="."]
 anchor_left = 0.5
