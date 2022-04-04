@@ -26,6 +26,9 @@ func start_game() -> void:
     if loading_game:
         return
 
+    # Persist settings
+    Settings.save_settings()
+
     print("Start game: Switch to MainGame scene")
     loading_game = true
 
