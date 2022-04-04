@@ -6,7 +6,7 @@ Entry for the [Ludum Dare 50](https://ldjam.com/events/ludum-dare/50) with the t
 
 ## "Story"
 
-Taking out the trash is a pretty annoyng chore.  
+Taking out the trash is a pretty annoying chore.  
 You've gotta put on street clothes and go into this terrifying place called "outside".  
 That's why in many living arrangements, this is procrastinated until the trash spills out of the can.  
 By smartly placing your trash you can "delay the inevitable" spilling until hopefully someone else spills it so that it's their problem.  
