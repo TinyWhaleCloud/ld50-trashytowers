@@ -6,6 +6,7 @@
 
 [node name="Crowbar" instance=ExtResource( 1 )]
 mass = 10.0
+score_value = 5
 
 [node name="Sprite" parent="." index="0"]
 texture = ExtResource( 2 )

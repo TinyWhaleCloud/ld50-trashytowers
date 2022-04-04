@@ -208,7 +208,7 @@ func _on_Trash_touched_trash_bin(trash: Trash) -> void:
 
     # Add a point to the player's score
     if not player.game_over:
-        player.add_score(1)
+        player.add_score(trash.score_value)
 
 
 # Called when a trash object touches the floor (or anything on the floor)
