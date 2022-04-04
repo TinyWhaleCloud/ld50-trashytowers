@@ -22,10 +22,17 @@ func show():
     # Show the screen
     visible = true
 
+    var is_singleplayer: bool = Settings.game_mode == Settings.GameMode.MODE_SOLO
     var joypad_count = Input.get_connected_joypads().size()
-    if joypad_count > 0:
-        $Player2Controls.visible = joypad_count == 1
+
+    if is_singleplayer or joypad_count > 1:
         $Player1Controls/P1ControlsLabel.text = 'Controls'
+        $Player2Controls.visible = false
+    else:
+        $Player1Controls/P1ControlsLabel.text = 'Player 1'
+        $Player2Controls.visible = true
+
+    if joypad_count > 0:
         $Player1Controls/EscKey.texture = load("res://screens/info_screen/blackPixel.png")
         $Player1Controls/BackToMenuSpacer2.texture = load("res://screens/info_screen/controllerButtonSelect.png")
         $Player1Controls/WKey.texture = load("res://screens/info_screen/dpadUp.png")
