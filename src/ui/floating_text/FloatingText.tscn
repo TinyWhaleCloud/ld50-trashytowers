@@ -18,3 +18,4 @@ text = "Example"
 align = 1
 
 [node name="Tween" type="Tween" parent="."]
+pause_mode = 2
