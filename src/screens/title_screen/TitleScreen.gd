@@ -8,6 +8,7 @@ var loading_game := false
 
 func _ready() -> void:
     $Header.grab_focus()
+    $HighScoreDisplay.text = "High: %d" % HighScores.scores[0]["score"]
     $SoundEffectsChecked.pressed = Settings.sfx_enabled
     $MusicEnabled.pressed = Settings.music_enabled
     if Settings.music_enabled:

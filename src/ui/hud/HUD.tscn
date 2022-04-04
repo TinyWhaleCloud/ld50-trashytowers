@@ -29,7 +29,6 @@ custom_fonts/font = ExtResource( 2 )
 text = "Score: 0"
 
 [node name="GameOverScreen" type="Panel" parent="."]
-visible = false
 anchor_left = 0.5
 anchor_top = 0.5
 anchor_right = 0.5
@@ -92,6 +91,7 @@ margin_right = 207.0
 margin_bottom = 206.0
 focus_neighbour_right = NodePath("../BackToMenuButton")
 focus_next = NodePath("../BackToMenuButton")
+focus_previous = NodePath("../../HighScoresContainer/SaveScoreButton")
 custom_fonts/font = ExtResource( 2 )
 text = "Play again"
 
@@ -101,9 +101,56 @@ margin_top = 170.0
 margin_right = 499.0
 margin_bottom = 206.0
 focus_neighbour_left = NodePath("../PlayAgainButton")
+focus_neighbour_right = NodePath("../../HighScoresContainer/UsernameInput")
+focus_next = NodePath("../../HighScoresContainer/UsernameInput")
 focus_previous = NodePath("../PlayAgainButton")
 custom_fonts/font = ExtResource( 2 )
 text = "Back to menu"
 
+[node name="HighScoresContainer" type="Panel" parent="."]
+margin_left = 929.0
+margin_top = 57.0
+margin_right = 1248.0
+margin_bottom = 650.0
+
+[node name="Label" type="Label" parent="HighScoresContainer"]
+margin_top = 6.0
+margin_right = 314.0
+margin_bottom = 36.0
+custom_fonts/font = ExtResource( 2 )
+text = "High Scores"
+align = 1
+
+[node name="ScoresContainer" type="ItemList" parent="HighScoresContainer"]
+margin_top = 56.0
+margin_right = 319.0
+margin_bottom = 485.0
+custom_fonts/font = ExtResource( 2 )
+
+[node name="UsernameInput" type="LineEdit" parent="HighScoresContainer"]
+margin_left = 9.0
+margin_top = 499.0
+margin_right = 305.0
+margin_bottom = 539.0
+focus_neighbour_left = NodePath("../../GameOverScreen/BackToMenuButton")
+focus_neighbour_bottom = NodePath("../SaveScoreButton")
+focus_next = NodePath("../SaveScoreButton")
+focus_previous = NodePath("../../GameOverScreen/BackToMenuButton")
+custom_fonts/font = ExtResource( 2 )
+text = "Username"
+
+[node name="SaveScoreButton" type="Button" parent="HighScoresContainer"]
+margin_left = 10.0
+margin_top = 547.0
+margin_right = 305.0
+margin_bottom = 583.0
+focus_neighbour_top = NodePath("../UsernameInput")
+focus_next = NodePath("../../GameOverScreen/PlayAgainButton")
+focus_previous = NodePath("../UsernameInput")
+custom_fonts/font = ExtResource( 2 )
+text = "Submit Score"
+
 [connection signal="pressed" from="GameOverScreen/PlayAgainButton" to="." method="_on_PlayAgainButton_pressed"]
 [connection signal="pressed" from="GameOverScreen/BackToMenuButton" to="." method="_on_BackToMenuButton_pressed"]
+[connection signal="focus_entered" from="HighScoresContainer/UsernameInput" to="." method="_on_UsernameInput_focus_entered"]
+[connection signal="pressed" from="HighScoresContainer/SaveScoreButton" to="." method="_on_SaveScoreButton_pressed"]

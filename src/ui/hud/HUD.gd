@@ -8,6 +8,7 @@ onready var player2_score_label := $Player2ScoreLabel as Label
 
 var player1_score:int = 0
 var player2_score:int = 0
+var end_score: int = 0
 
 # Game state
 var total_player_count := 0
@@ -16,6 +17,7 @@ var total_player_count := 0
 func _ready() -> void:
     # Hide game over screen
     game_over_screen.visible = false
+    $HighScoresContainer.visible = false
     game_over_screen.set_process_input(false)
 
 
@@ -49,7 +51,15 @@ func set_player_score(score: int, player_number: int) -> void:
         else:
             player2_score = score
     else:
+        end_score = score
         score_label.text = "Score: %d" % [score]
+
+func draw_high_scores():
+    $HighScoresContainer/ScoresContainer.clear()
+    for score in HighScores.scores:
+        if score.score != 0:
+            $HighScoresContainer/ScoresContainer.add_item("%s: %d" % [score.name, score.score])
+    $HighScoresContainer.visible = true
 
 func show_game_over(singleplayer: bool, player_number: int) -> void:
     $GameOverScreen/PlayAgainButton.grab_focus()
@@ -58,6 +68,7 @@ func show_game_over(singleplayer: bool, player_number: int) -> void:
         $GameOverScreen/TextContainer/WhoWonDisp.visible = false
         $GameOverScreen/TextContainer/Spacer2.visible = false
         $GameOverScreen/TextContainer/ScoreDisp.text = get_player_score_label(1).text
+        draw_high_scores()
     else:
         var who_won: int
         var score: int
@@ -67,6 +78,7 @@ func show_game_over(singleplayer: bool, player_number: int) -> void:
         else:
             who_won = 1
             score = player1_score
+        end_score = score
         $GameOverScreen/TextContainer/WhoWonDisp.text = "Player %d won" % who_won
         $GameOverScreen/TextContainer/ScoreDisp.text = "Score: %s" % score
     game_over_screen.visible = true
@@ -76,3 +88,15 @@ func _on_PlayAgainButton_pressed() -> void:
 
 func _on_BackToMenuButton_pressed() -> void:
     get_tree().change_scene_to(load("res://screens/title_screen/TitleScreen.tscn"))
+
+func _on_SaveScoreButton_pressed():
+    HighScores.add_score({"name": $HighScoresContainer/UsernameInput.text, "score": end_score})
+    draw_high_scores()
+    $HighScoresContainer/SaveScoreButton.visible = false
+    $HighScoresContainer/UsernameInput.visible = false
+    $GameOverScreen/PlayAgainButton.grab_focus()
+
+
+func _on_UsernameInput_focus_entered():
+    if $HighScoresContainer/UsernameInput.text == "Username":
+        $HighScoresContainer/UsernameInput.text = ""
