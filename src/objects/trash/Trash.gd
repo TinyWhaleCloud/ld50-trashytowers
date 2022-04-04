@@ -8,6 +8,9 @@ signal touched_trash_bin(trash)
 # Emitted when the trash touched the floor (or something that is lying on the floor)
 signal touched_floor(trash)
 
+# Constant
+const IS_TRASH = true
+
 # State variables
 var has_touched_anything := false
 var is_in_trash_bin := false
@@ -39,11 +42,16 @@ func _on_Trash_body_entered(body: Node) -> void:
 
     # If the player is still controlling the trash, the trash should be dropped automatically
     if not has_touched_anything:
-        prints(self, "Trash has touched something")
-        has_touched_anything = true
-        play_sound = true
-        stop_control()
-        emit_signal("touched_anything", self)
+        # Ignore collision if its with another player controlled object (chaos mode)
+        if body.get("IS_TRASH") and not body.get("has_touched_anything"):
+            prints(self, "Trash has touched trash that has not landed yet. Ignore.")
+            play_sound = true
+        else:
+            prints(self, "Trash has touched something")
+            has_touched_anything = true
+            play_sound = true
+            stop_control()
+            emit_signal("touched_anything", self)
 
     # Detect when the trash lands in the trash bin (or collides with any trash in the bin)
     if not is_in_trash_bin and (body is TrashBin or body.get("is_in_trash_bin")):
