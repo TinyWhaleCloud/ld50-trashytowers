@@ -14,6 +14,22 @@ const TRASH_SPEED_DOWN = 100
 const TRASH_SPEED_DROP = 400
 const TRASH_ROT_SPEED = 5
 
+# Node references
+onready var spawn_area := $SpawnArea as Area2D
+onready var spawn_retry_timer := $SpawnRetryTimer as Timer
+
+# Player number (starting with 1, set by the main game)
+var player_number := 1
+
+# Input action names, depending on the player number
+onready var input_action_left = "player%d_left" % [player_number]
+onready var input_action_right = "player%d_right" % [player_number]
+onready var input_action_up = "player%d_up" % [player_number]
+onready var input_action_down = "player%d_down" % [player_number]
+onready var input_action_turn_cw = "player%d_turn_cw" % [player_number]
+onready var input_action_turn_ccw = "player%d_turn_ccw" % [player_number]
+onready var input_action_drop = "player%d_drop" % [player_number]
+
 # State variables
 var game_over := false
 var current_trash: Trash = null
@@ -24,29 +40,30 @@ var current_score := 0
 
 func _process(delta) -> void:
     if current_trash:
-        if Input.is_action_just_pressed("player1_drop"):
+        if Input.is_action_just_pressed(input_action_drop):
             drop_trash(true)
         else:
             process_movement_input()
+
 
 func process_movement_input() -> void:
     # Process player movement
     var trash_direction := Vector2(0, 0)
     var trash_rotation := 0
 
-    if Input.is_action_pressed("player1_left"):
+    if Input.is_action_pressed(input_action_left):
         trash_direction.x -= 1
-    if Input.is_action_pressed("player1_right"):
+    if Input.is_action_pressed(input_action_right):
         trash_direction.x += 1
 
     # Accelerate downwards motion
-    if Input.is_action_pressed("player1_down"):
+    if Input.is_action_pressed(input_action_down):
         trash_direction.y += 1
 
     # Rotation
-    if Input.is_action_pressed("player1_turn_cw"):
+    if Input.is_action_pressed(input_action_turn_cw):
         trash_rotation += 1
-    if Input.is_action_pressed("player1_turn_ccw"):
+    if Input.is_action_pressed(input_action_turn_ccw):
         trash_rotation -= 1
 
     var trash_velocity := trash_direction * TRASH_SPEED_PLAYER + Vector2(0, 1) * TRASH_SPEED_DOWN
@@ -67,6 +84,7 @@ func take_trash(trash: Trash) -> void:
     current_trash = trash
     current_trash.start_control()
 
+
 # Drop the trash the player is controlling (voluntary drop)
 func drop_trash(accelerate_fall := false) -> void:
     if not current_trash:
@@ -82,20 +100,29 @@ func drop_trash(accelerate_fall := false) -> void:
     # Emit a signal to the main game
     emit_signal("trash_dropped")
 
+
 # Return true if the player controls a trash object right now
 func is_controlling_trash() -> bool:
     return current_trash != null
 
+
 # Returns true unless there are objects inside the spawn area (making it unsafe to spawn new objects)
 func is_spawn_area_clear() -> bool:
-    var overlapping_bodies := ($SpawnArea as Area2D).get_overlapping_bodies()
+    var overlapping_bodies := spawn_area.get_overlapping_bodies()
     return len(overlapping_bodies) == 0
+
 
 # Add points to the player's score
 func add_score(points: int) -> void:
     current_score += points
     prints(self, "New score:", current_score)
     emit_signal("score_changed", current_score)
+
+
+# Start the spawn retry timer (1 second)
+func start_spawn_retry_timer() -> void:
+    spawn_retry_timer.start(1)
+
 
 # Called when the retry timer expires
 func _on_SpawnRetryTimer_timeout() -> void:

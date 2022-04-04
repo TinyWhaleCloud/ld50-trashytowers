@@ -13,10 +13,9 @@ var has_touched_anything := false
 var is_in_trash_bin := false
 var is_on_floor := false
 var player_controlled := false
+var player_owner := 1
 var player_velocity := Vector2(0, 0)
 var player_rotation := 0
-
-onready var settings := get_node("/root/Settings") as Settings
 
 func _integrate_forces(state) -> void:
     if player_controlled:
@@ -60,5 +59,5 @@ func _on_Trash_body_entered(body: Node) -> void:
         play_sound = true
         emit_signal("touched_floor", self)
 
-    if play_sound and settings.sfx_enabled:
+    if play_sound and Settings.sfx_enabled:
         ($AudioStreamPlayer as AudioStreamPlayer).play()
