@@ -1,7 +1,9 @@
-[gd_scene load_steps=3 format=2]
+[gd_scene load_steps=5 format=2]
 
 [ext_resource path="res://ui/hud/HUD.gd" type="Script" id=1]
 [ext_resource path="res://fonts/connection/Connection_30.tres" type="DynamicFont" id=2]
+[ext_resource path="res://fonts/connection/Connection_36.tres" type="DynamicFont" id=3]
+[ext_resource path="res://ui/hud/PausedContainer.gd" type="Script" id=4]
 
 [node name="HUD" type="CanvasLayer"]
 script = ExtResource( 1 )
@@ -175,6 +177,22 @@ focus_next = NodePath("../../GameOverScreen/PlayAgainButton")
 focus_previous = NodePath("../UsernameInput")
 custom_fonts/font = ExtResource( 2 )
 text = "Submit Score"
+
+[node name="PausedContainer" type="Panel" parent="."]
+pause_mode = 2
+margin_left = 372.0
+margin_top = 110.0
+margin_right = 903.0
+margin_bottom = 231.0
+script = ExtResource( 4 )
+
+[node name="Label" type="Label" parent="PausedContainer"]
+margin_top = 17.0
+margin_right = 530.0
+margin_bottom = 94.0
+custom_fonts/font = ExtResource( 3 )
+text = "The game is paused.
+Press any key to continue"
 
 [connection signal="pressed" from="GameOverScreen/PlayAgainButton" to="." method="_on_PlayAgainButton_pressed"]
 [connection signal="pressed" from="GameOverScreen/BackToMenuButton" to="." method="_on_BackToMenuButton_pressed"]

@@ -3,10 +3,15 @@ extends Node2D
 
 # Emitted when the player dropped a trash object (i.e. let go of it)
 signal trash_dropped
+
 # Emitted when the spawn retry timer expired
 signal retry_spawn
+
 # Emitted when the score has changed
 signal score_changed(new_score)
+
+# Emitted when the pause button is pressed
+signal game_paused
 
 # Constants
 const TRASH_SPEED_PLAYER = 200
@@ -49,6 +54,13 @@ func _process(delta) -> void:
         else:
             process_movement_input()
 
+func _input(event):
+    if event.is_action_pressed("pause_game"):
+        pause_game()
+        get_tree().set_input_as_handled()
+
+func pause_game()-> void:
+    emit_signal("game_paused")
 
 func process_movement_input() -> void:
     # Process player movement

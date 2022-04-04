@@ -18,10 +18,11 @@ var end_score: int = 0
 
 
 func _ready() -> void:
-    # Hide game over screen
+    # Hide game over screen, high scores and paused container
     game_over_screen.visible = false
-    $HighScoresContainer.visible = false
     game_over_screen.set_process_input(false)
+    $HighScoresContainer.visible = false
+    $PausedContainer.visible = false
 
 
 func init_hud(_total_player_count: int) -> void:
@@ -34,6 +35,9 @@ func init_hud(_total_player_count: int) -> void:
         player1_score_box.get_node("PlayerLabel").visible = false
         player2_score_box.visible = false
 
+func _on_game_paused() -> void:
+    $PausedContainer.visible = true
+    get_tree().paused = true
 
 func get_player_score_box(player_number: int) -> VBoxContainer:
     if player_number == 1:
