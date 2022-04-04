@@ -3,6 +3,7 @@ extends Node2D
 const MainGame = preload("res://screens/main_game/MainGame.tscn")
 const InfoScreen = preload("res://screens/info_screen/InfoScreen.tscn")
 
+
 func _ready() -> void:
     $Header.grab_focus()
     $SoundEffectsChecked.pressed = Settings.sfx_enabled
@@ -10,13 +11,15 @@ func _ready() -> void:
     if Settings.music_enabled:
         $TitleMusicPlayer.play()
 
+
 func _input(event: InputEvent) -> void:
     # Exit the game with Escape
     if event.is_action_pressed("ui_cancel"):
         get_tree().quit()
 
+
 # Start the game in the specified game mode
-func start_game(game_mode: int) -> void:
+func start_game() -> void:
     print("Start game: Switch to MainGame scene")
 
     if Settings.sfx_enabled:
@@ -24,18 +27,36 @@ func start_game(game_mode: int) -> void:
         yield($StartGameSoundPlayer, "finished")
 
     # Set game mode and change scene to main game
-    Settings.game_mode = game_mode
     get_tree().change_scene_to(MainGame)
+
+
+# Sets the game mode
+func set_game_mode(game_mode: int) -> void:
+    Settings.game_mode = game_mode
+
+
+# Show the info screen before starting the game
+func show_info_screen() -> void:
+    $InfoScreen.show()
+
 
 # Start buttons
 func _on_SinglePlayerButton_pressed() -> void:
-    start_game(Settings.GameMode.MODE_SOLO)
+    set_game_mode(Settings.GameMode.MODE_SOLO)
+    show_info_screen()
 
 func _on_ChaosButton_pressed() -> void:
-    start_game(Settings.GameMode.MODE_MULTI_CHAOS)
+    set_game_mode(Settings.GameMode.MODE_MULTI_CHAOS)
+    show_info_screen()
 
 func _on_HotseatButton_pressed() -> void:
-    start_game(Settings.GameMode.MODE_MULTI_HOTSEAT)
+    set_game_mode(Settings.GameMode.MODE_MULTI_HOTSEAT)
+    show_info_screen()
+
+# Called when the info screen is visible and any key is pressed
+func _on_InfoScreen_start_game() -> void:
+    start_game()
+
 
 # Sound setting
 func _on_SoundEffectsChecked_toggled(button_pressed: bool) -> void:
