@@ -7,7 +7,7 @@ Entry for the [Ludum Dare 50](https://ldjam.com/events/ludum-dare/50) with the t
 ## "Story"
 
 Taking out the trash is a pretty annoing chore.  
-You've gotta put on outside clothes and go into this terrifying place called "outside".  
+You've gotta put on street clothes and go into this terrifying place called "outside".  
 That's why in many living arangements, this is procastinated until the trash spills out of the can.  
 By smartly placing your trash you can "delay the inevitable" spilling until hopefully someone else spills it so that it's their problem.  
 This is a game about that.
