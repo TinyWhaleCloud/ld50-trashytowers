@@ -58,6 +58,7 @@ config/icon="res://icon.png"
 [autoload]
 
 Settings="*res://Settings.gd"
+HighScores="*res://HighScores.gd"
 
 [debug]
 
