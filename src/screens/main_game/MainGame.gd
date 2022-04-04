@@ -31,6 +31,8 @@ func _ready() -> void:
     if Settings.music_enabled:
         $MusicPlayer.play()
 
+    ($Floor as Floor).trash_bin = $TrashBin as TrashBin
+
     # Setup game and HUD
     setup_game()
     hud.init_hud(total_player_count)
