@@ -10,50 +10,32 @@ var music_enabled_text = 'Toggle music'
 func _ready():
     show_default_text()
 
-func _on_HotseatButton_mouse_entered():
-	self.set_text(hotseat_text)
-
-func _on_ChaosButton_mouse_entered():
-	self.set_text(chaos_text)
-
-func _on_SinglePlayerButton_mouse_entered():
-    self.set_text(single_player_text)
-
-func _on_HotseatButton_focus_entered():
-	self.set_text(hotseat_text)
-
-func _on_ChaosButton_focus_entered():
-	self.set_text(chaos_text)
-
-func _on_SinglePlayerButton_focus_entered():
-	self.set_text(single_player_text)
-
 func show_default_text():
     self.set_text(default_text)
 
-func _on_SinglePlayerButton_focus_exited():
-	show_default_text()
-
-func _on_SinglePlayerButton_mouse_exited():
+func _on_element_exited():
     show_default_text()
 
-func _on_ChaosButton_focus_exited():
-	show_default_text()
-
-func _on_ChaosButton_mouse_exited():
-	show_default_text()
-
-func _on_HotseatButton_focus_exited():
-	show_default_text()
-
-func _on_HotseatButton_mouse_exited():
-	show_default_text()
-
-func _on_element_exited():
-	show_default_text()
-
 func _on_SoundEffectsChecked_entered():
-	self.set_text(sfx_enabled_text)
+    self.set_text(sfx_enabled_text)
 
 func _on_MusicEnabled_entered():
-	self.set_text(music_enabled_text)
+    self.set_text(music_enabled_text)
+
+func _on_SinglePlayerButton_entered():
+    self.set_text(single_player_text)
+
+func _on_SinglePlayerButton_exited():
+    show_default_text()
+
+func _on_ChaosButton_entered():
+    self.set_text(chaos_text)
+
+func _on_ChaosButton_exited():
+    show_default_text()
+
+func _on_HotseatButton_entered():
+    self.set_text(hotseat_text)
+
+func _on_HotseatButton_exited():
+    show_default_text()
