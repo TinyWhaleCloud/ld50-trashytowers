@@ -8,6 +8,11 @@ This game is playable with a keyboard or one or more gamepads.
 The native Linux build has some difficult to reproduce issues with the gamepad disconnecting.  
 If this happens, try the web build instead.
 
+<video src="./screenshots/singleplayer.webm">
+Your browser does not seem to support the video tag or .webm files.
+If it did, you would be seeing a short clip of someone playing the single player mode
+</video>
+
 ## Setting
 
 Taking out the trash is a pretty annoying chore.  
@@ -21,6 +26,8 @@ This is a game about that.
 
 ### Single
 
+![A screenshot of the single player mode](./screenshots/single_player.png)
+
 Play alone to beat your highscore.  
 This may be the least fun mode of play but since having friends around to play games is a rare privilege, there had to
 be some way to try the game alone.
@@ -28,6 +35,8 @@ be some way to try the game alone.
 If you somehow can (Parsec/ actually meeting people/ whatever else) also try the other modes!
 
 ### Chaos
+
+![A screenshot of the chaos mode](./screenshots/chaos_mode.png)
 
 A chaotic mode in which you and a friend try to put trash in the same can simultaneously.  
 Whoever has dropped the last piece before the heap spills looses.
@@ -39,6 +48,8 @@ Imagine this being a bit like when someone has put in something compressed that 
 thrown something in the trash before it's done extending, it will look like the spilling was your fault.
 
 ### Hotseat
+
+![A screenshot of the hotseat mode](./screenshots/hotseat.png)
 
 Take turns with a friend putting trash in the same can.  
 Whoever has dropped the last piece before the heap spills looses.
