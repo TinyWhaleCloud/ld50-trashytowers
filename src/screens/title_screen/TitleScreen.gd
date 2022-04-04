@@ -1,9 +1,11 @@
 extends Node2D
 
 const MainGame = preload("res://screens/main_game/MainGame.tscn")
+const InfoScreen = preload("res://screens/info_screen/InfoScreen.tscn")
 onready var settings := get_node("/root/Settings") as Settings
 
 func _ready() -> void:
+    $Header.grab_focus()
     $SoundEffectsChecked.pressed = settings.sfx_enabled
     $MusicEnabled.pressed = settings.music_enabled
     if settings.music_enabled:

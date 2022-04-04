@@ -100,11 +100,12 @@ margin_top = 35.0
 margin_right = 366.0
 margin_bottom = 75.0
 
-[node name="Spacer5" type="Control" parent="Player1Controls"]
+[node name="BackToMenuSpacer2" type="TextureRect" parent="Player1Controls"]
 margin_left = 370.0
 margin_top = 35.0
 margin_right = 490.0
 margin_bottom = 75.0
+texture = ExtResource( 13 )
 
 [node name="SlowDownLabel" type="RichTextLabel" parent="Player1Controls"]
 margin_top = 79.0

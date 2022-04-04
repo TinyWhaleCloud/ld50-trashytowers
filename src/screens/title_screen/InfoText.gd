@@ -4,6 +4,8 @@ var default_text = 'Select a mode to play'
 var single_player_text = 'Try to beat your high score by placing trash in a can. Amazing!'
 var hotseat_text = 'Take turns placing trash in the can with your friends. Who could imagine a better thing to do?'
 var chaos_text = 'A chaotic mode where two or more players try placing trash in the can at the same time'
+var sfx_enabled_text = 'Toggle sound effects'
+var music_enabled_text = 'Toggle music'
 
 func _ready():
     show_default_text()
@@ -46,3 +48,12 @@ func _on_HotseatButton_focus_exited():
 
 func _on_HotseatButton_mouse_exited():
 	show_default_text()
+
+func _on_element_exited():
+	show_default_text()
+
+func _on_SoundEffectsChecked_entered():
+	self.set_text(sfx_enabled_text)
+
+func _on_MusicEnabled_entered():
+	self.set_text(music_enabled_text)
