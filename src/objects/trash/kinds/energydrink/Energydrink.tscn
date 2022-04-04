@@ -10,6 +10,7 @@ bounce = 0.4
 
 [node name="Energydrink" instance=ExtResource( 1 )]
 physics_material_override = SubResource( 1 )
+score_value = 2
 
 [node name="Sprite" parent="." index="0"]
 texture = ExtResource( 2 )

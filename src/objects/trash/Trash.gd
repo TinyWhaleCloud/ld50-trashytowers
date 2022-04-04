@@ -11,6 +11,9 @@ signal touched_floor(trash)
 # Constant
 const IS_TRASH = true
 
+# Trash properties
+export var score_value := 1
+
 # State variables
 var has_touched_anything := false
 var is_in_trash_bin := false

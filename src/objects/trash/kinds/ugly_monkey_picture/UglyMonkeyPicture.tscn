@@ -8,6 +8,7 @@
 extents = Vector2( 32, 32 )
 
 [node name="UglyMonkeyPicture" instance=ExtResource( 1 )]
+score_value = 0
 
 [node name="Sprite" parent="." index="0"]
 texture = ExtResource( 2 )

@@ -9,6 +9,16 @@
 config_version=4
 
 _global_script_classes=[ {
+"base": "Node2D",
+"class": "FloatingText",
+"language": "GDScript",
+"path": "res://ui/floating_text/FloatingText.gd"
+}, {
+"base": "Node2D",
+"class": "FloatingTextSpawner",
+"language": "GDScript",
+"path": "res://ui/floating_text/FloatingTextSpawner.gd"
+}, {
 "base": "StaticBody2D",
 "class": "Floor",
 "language": "GDScript",
@@ -40,6 +50,8 @@ _global_script_classes=[ {
 "path": "res://objects/trash/TrashSpawner.gd"
 } ]
 _global_script_class_icons={
+"FloatingText": "",
+"FloatingTextSpawner": "",
 "Floor": "",
 "HUD": "",
 "Player": "",
