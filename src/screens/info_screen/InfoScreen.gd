@@ -1,8 +1,9 @@
 extends Node2D
 
 func _ready():
-    if Input.get_connected_joypads().size() > 0:
-        $Player2Controls.visible = false
+    var joypad_count = Input.get_connected_joypads().size() 
+    if joypad_count > 0:
+        $Player2Controls.visible = joypad_count == 1
         $Player1Controls/P1ControlsLabel.text = 'Controls'
         $Player1Controls/EscKey.texture = load("res://screens/info_screen/blackPixel.png")
         $Player1Controls/BackToMenuSpacer2.texture = load("res://screens/info_screen/controllerButtonSelect.png")
