@@ -28,6 +28,12 @@ If you somehow can (Parsec/ actually meeting people/ whatever else) also try the
 A chaotic mode in which you and a friend try to put trash in the same can simultaneously.  
 Whoever has dropped the last piece before the heap spills looses.
 
+**Hot tip**: If you see something moving after the other player has set it down, you can slow down your own trash
+falling.  
+If you don't their trash might land after yours does, and you lose the game.  
+Imagine this being a bit like when someone has put in something compressed that extends over time; if you happen to
+have thrown something in the trash before it's done extending, it will look like the spilling was your fault.
+
 ### Hotseat
 
 Take turns with a friend putting trash in the same can.  
