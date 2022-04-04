@@ -15,6 +15,7 @@ const PlayerScene = preload("res://actors/player/Player.tscn")
 # Node references
 onready var hud := $HUD as HUD
 onready var trash_spawner := $TrashSpawner as TrashSpawner
+onready var floating_text_spawner := $FloatingTextSpawner as FloatingTextSpawner
 
 # Game mode settings
 var game_mode: int = Settings.GameMode.MODE_SOLO
@@ -208,6 +209,11 @@ func _on_Trash_touched_trash_bin(trash: Trash) -> void:
 
     # Add a point to the player's score
     if not player.game_over:
+        if trash.score_value == 0:
+            floating_text_spawner.spawn_text("worthless", trash.position, Color(0.5, 0.5, 0.5))
+        else:
+            floating_text_spawner.spawn_text(str(trash.score_value), trash.position)
+
         player.add_score(trash.score_value)
 
 
