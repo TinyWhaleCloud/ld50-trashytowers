@@ -115,6 +115,7 @@ func create_player(player_number: int) -> Player:
     new_player.connect("trash_dropped", self, "_on_Player_trash_dropped", [player_number])
     new_player.connect("score_changed", self, "_on_Player_score_changed", [player_number])
     new_player.connect("retry_spawn", self, "_on_Player_retry_spawn", [player_number])
+    new_player.connect("game_paused", hud, "_on_game_paused")
 
     # Add player to the scene
     add_child(new_player)

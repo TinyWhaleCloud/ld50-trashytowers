@@ -42,3 +42,4 @@ func show():
         $Player1Controls/DKey.texture = load("res://screens/info_screen/dpadRight.png")
         $Player1Controls/SKey.texture = load("res://screens/info_screen/dpadDown.png")
         $Player1Controls/SpaceBar.texture = load("res://screens/info_screen/controllerButtonUp.png")
+        $Player1Controls/ReturnKey.texture = load("res://screens/info_screen/controllerButtonStart.png")
