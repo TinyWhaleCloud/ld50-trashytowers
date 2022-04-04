@@ -18,9 +18,9 @@ var is_on_floor := false
 var player_controlled := false
 var player_owner := 1
 var player_velocity := Vector2(0, 0)
-var player_rotation := 0
+var player_rotation := 0.0
 
-func _integrate_forces(state) -> void:
+func _integrate_forces(_state) -> void:
     if player_controlled:
         linear_velocity = player_velocity
         angular_velocity = player_rotation
@@ -62,6 +62,10 @@ func _on_Trash_body_entered(body: Node) -> void:
 
     # Detect when the trash lands on the floor (or on any trash that is already lying on the floor)
     if not is_on_floor and (body is Floor or body.get("is_on_floor")):
+        if body is Floor and (body as Floor).body_really_touches_floor(self) == false:
+            prints(self, "Trash glitched through the bottom of the bin into the floor. Ignore.")
+            return
+
         prints(self, "Trash landed on the floor")
         is_on_floor = true
         play_sound = true

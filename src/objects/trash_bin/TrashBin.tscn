@@ -1,7 +1,10 @@
-[gd_scene load_steps=3 format=2]
+[gd_scene load_steps=4 format=2]
 
 [ext_resource path="res://objects/trash_bin/trashcan.png" type="Texture" id=1]
 [ext_resource path="res://objects/trash_bin/TrashBin.gd" type="Script" id=2]
+
+[sub_resource type="RectangleShape2D" id=1]
+extents = Vector2( 250, 50 )
 
 [node name="TrashBin" type="StaticBody2D"]
 script = ExtResource( 2 )
@@ -13,3 +16,9 @@ polygon = PoolVector2Array( -285, -294, -240, 303, 234, 301, 294, -295, 306, -29
 [node name="Sprite" type="Sprite" parent="."]
 texture = ExtResource( 1 )
 offset = Vector2( 0, -320 )
+
+[node name="BottomSafeArea" type="Area2D" parent="."]
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="BottomSafeArea"]
+position = Vector2( -5, 0 )
+shape = SubResource( 1 )

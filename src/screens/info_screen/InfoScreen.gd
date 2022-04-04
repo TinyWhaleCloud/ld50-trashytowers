@@ -13,7 +13,7 @@ func _input(event: InputEvent) -> void:
             return
 
         # Start the screen if any key (except for Escape) is pressed
-        if event is InputEventKey or event is InputEventJoypadButton and not event.is_pressed():
+        if (event is InputEventKey or event is InputEventJoypadButton) and not event.is_pressed():
             prints(self, 'Any key was pressed')
             emit_signal("start_game")
 
