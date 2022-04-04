@@ -1,4 +1,4 @@
-[gd_scene load_steps=8 format=2]
+[gd_scene load_steps=10 format=2]
 
 [ext_resource path="res://screens/main_game/MainGame.gd" type="Script" id=1]
 [ext_resource path="res://objects/trash_bin/TrashBin.tscn" type="PackedScene" id=2]
@@ -7,6 +7,12 @@
 [ext_resource path="res://screens/main_game/gameover.wav" type="AudioStream" id=6]
 [ext_resource path="res://objects/trash/TrashSpawner.tscn" type="PackedScene" id=7]
 [ext_resource path="res://screens/main_game/TrashyTowersGame.wav" type="AudioStream" id=8]
+
+[sub_resource type="RectangleShape2D" id=1]
+extents = Vector2( 20, 1000 )
+
+[sub_resource type="RectangleShape2D" id=2]
+extents = Vector2( 20, 1000 )
 
 [node name="MainGame" type="Node2D"]
 script = ExtResource( 1 )
@@ -27,6 +33,16 @@ stream = ExtResource( 6 )
 
 [node name="MusicPlayer" type="AudioStreamPlayer" parent="."]
 stream = ExtResource( 8 )
+
+[node name="Walls" type="StaticBody2D" parent="."]
+
+[node name="LeftWallCollisionShape" type="CollisionShape2D" parent="Walls"]
+position = Vector2( -20, 0 )
+shape = SubResource( 1 )
+
+[node name="RightWallCollisionShape" type="CollisionShape2D" parent="Walls"]
+position = Vector2( 1300, 0 )
+shape = SubResource( 2 )
 
 [connection signal="end_turn" from="." to="." method="_on_MainGame_end_turn" flags=3]
 [connection signal="next_turn" from="." to="." method="_on_MainGame_next_turn" flags=3]
