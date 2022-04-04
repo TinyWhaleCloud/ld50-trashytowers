@@ -25,6 +25,7 @@ var total_player_count := 1
 var players := []
 var current_player := 1
 var last_drop_by_player := 0
+var game_over := false
 
 
 func _ready() -> void:
@@ -130,7 +131,7 @@ func spawn_player_trash(player_number: int) -> void:
     var player := get_player(player_number)
 
     # Don't spawn new objects if the player has already lost the game
-    if player.game_over:
+    if game_over:
         prints(self, "spawn_player_trash: Player %d has already lost!" % [player_number])
         return
 
@@ -175,10 +176,12 @@ func player_game_over(player_number: int) -> void:
     player.game_over = true
     player.drop_trash()
 
-    # Show game over screen
-    hud.show_game_over(is_singleplayer_mode(), player_number)
-    if Settings.sfx_enabled:
-        $GameOverPlayer.play()
+    if not game_over:
+        # Show game over screen
+        hud.show_game_over(is_singleplayer_mode(), player_number)
+        if Settings.sfx_enabled:
+            $GameOverPlayer.play()
+    game_over = true
 
 
 # Called when a trash object touches anything for the first time
@@ -204,7 +207,7 @@ func _on_Trash_touched_trash_bin(trash: Trash) -> void:
     var player := get_player(trash.player_owner)
 
     # Add a point to the player's score
-    if not player.game_over:
+    if not game_over:
         if trash.score_value == 0:
             floating_text_spawner.spawn_text("worthless", trash.position, Color(0.5, 0.5, 0.5))
         else:
@@ -254,8 +257,7 @@ func _on_MainGame_end_turn(player_number: int) -> void:
         # In singleplayer and multiplayer hotseat mode: Switch to next player (if there is one)
         next_player = player_number + 1 if player_number < total_player_count else 1
 
-    # TODO: Use a global game over state
-    if not get_player(player_number).game_over:
+    if not game_over:
         emit_signal("next_turn", next_player)
 
 
