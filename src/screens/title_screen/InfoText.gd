@@ -2,8 +2,8 @@ extends RichTextLabel
 
 var default_text = 'Select a mode to play'
 var single_player_text = 'Try to beat your high score by placing trash in a can. Amazing!'
-var hotseat_text = 'Take turns placing trash in the can with a friend. Whoever dropped the last piece of trash before it spills over looses.'
-var chaos_text = 'A chaotic mode where two players try placing trash in the can at the same time. Whover dropped the last piece of trash before it spills over looses.'
+var hotseat_text = 'Take turns placing trash in the can with a friend. Whoever dropped the last piece of trash before it spills over loses.'
+var chaos_text = 'A chaotic mode where two players try placing trash in the can at the same time. Whoever dropped the last piece of trash before it spills over loses.'
 var sfx_enabled_text = 'Toggle sound effects'
 var music_enabled_text = 'Toggle music'
 
