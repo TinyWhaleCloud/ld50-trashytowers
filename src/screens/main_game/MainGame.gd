@@ -263,6 +263,10 @@ func _on_MainGame_end_turn(player_number: int) -> void:
 
 # Called to start the next turn for a player
 func _on_MainGame_next_turn(player_number: int) -> void:
+    # In hotseat mode: Highlight the player label
+    if is_multiplayer_hotseat_mode():
+        hud.set_active_player(player_number)
+
     # Spawn the trash
     if not get_player(player_number).game_over:
         spawn_player_trash(player_number)

@@ -1,17 +1,20 @@
 class_name HUD
 extends CanvasLayer
 
+# Constants
+const PLAYER_DEFAULT_COLOR = Color(0, 0, 0)
+const PLAYER_HIGHLIGHT_COLOR = Color(1, 0, 1)
+
 # Node references
 onready var game_over_screen := $GameOverScreen as Panel
-onready var player1_score_label := $Player1ScoreLabel as Label
-onready var player2_score_label := $Player2ScoreLabel as Label
-
-var player1_score:int = 0
-var player2_score:int = 0
-var end_score: int = 0
+onready var player1_score_box := $Player1ScoreBox as VBoxContainer
+onready var player2_score_box := $Player2ScoreBox as VBoxContainer
 
 # Game state
 var total_player_count := 0
+var player1_score: int = 0
+var player2_score: int = 0
+var end_score: int = 0
 
 
 func _ready() -> void:
@@ -23,20 +26,32 @@ func _ready() -> void:
 
 func init_hud(_total_player_count: int) -> void:
     total_player_count = _total_player_count
+
     for i in range(1, total_player_count + 1):
         set_player_score(0, i)
 
-    # Only show score label for player 2 if there is a player 2
-    player2_score_label.visible = total_player_count > 1
+    if total_player_count == 1:
+        player1_score_box.get_node("PlayerLabel").visible = false
+        player2_score_box.visible = false
+
+
+func get_player_score_box(player_number: int) -> VBoxContainer:
+    if player_number == 1:
+        return player1_score_box
+    elif player_number == 2:
+        return player2_score_box
+    return null
+
+
+
+func get_player_label(player_number: int) -> Label:
+    var box = get_player_score_box(player_number)
+    return (box.get_node("PlayerLabel") as Label) if box else null
 
 
 func get_player_score_label(player_number: int) -> Label:
-    # TODO: Dynamic generation of labels using an array
-    if player_number == 1:
-        return player1_score_label
-    elif player_number == 2:
-        return player2_score_label
-    return null
+    var box = get_player_score_box(player_number)
+    return (box.get_node("ScoreLabel") as Label) if box else null
 
 
 func set_player_score(score: int, player_number: int) -> void:
@@ -44,15 +59,27 @@ func set_player_score(score: int, player_number: int) -> void:
     if not score_label:
         return
 
+    # Change text
+    score_label.text = "Score: %d" % [score]
+
     if total_player_count > 1:
-        score_label.text = "Player %d - Score: %d" % [player_number, score]
         if player_number == 1:
             player1_score = score
         else:
             player2_score = score
     else:
         end_score = score
-        score_label.text = "Score: %d" % [score]
+
+
+func set_active_player(player_number: int) -> void:
+    # Highlight the new active player
+    var player_label = get_player_label(player_number)
+    player_label.modulate = PLAYER_HIGHLIGHT_COLOR
+
+    # Unhighlight the other player
+    var other_player_label = get_player_label(2 if player_number == 1 else 1)
+    other_player_label.modulate = PLAYER_DEFAULT_COLOR
+
 
 func draw_high_scores():
     $HighScoresContainer/ScoresContainer.clear()
