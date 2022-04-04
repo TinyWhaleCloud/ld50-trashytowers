@@ -15,6 +15,7 @@ var total_player_count := 0
 var player1_score: int = 0
 var player2_score: int = 0
 var end_score: int = 0
+var game_over: bool = false
 
 
 func _ready() -> void:
@@ -36,8 +37,9 @@ func init_hud(_total_player_count: int) -> void:
         player2_score_box.visible = false
 
 func _on_game_paused() -> void:
-    $PausedContainer.visible = true
-    get_tree().paused = true
+    if not game_over:
+        $PausedContainer.visible = true
+        get_tree().paused = true
 
 func get_player_score_box(player_number: int) -> VBoxContainer:
     if player_number == 1:
@@ -93,6 +95,7 @@ func draw_high_scores():
     $HighScoresContainer.visible = true
 
 func show_game_over(singleplayer: bool, player_number: int) -> void:
+    game_over = true
     $GameOverScreen/PlayAgainButton.grab_focus()
     game_over_screen.set_process_input(true)
     if singleplayer:

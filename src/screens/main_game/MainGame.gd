@@ -65,6 +65,7 @@ func setup_game() -> void:
         Settings.GameMode.MODE_MULTI_HOTSEAT:
             prints(self, "Game mode: Multiplayer Hotseat")
             total_player_count = 2
+            $MusicPlayer.pause_mode = Node.PAUSE_MODE_PROCESS
 
     # Create players
     players = []
@@ -260,6 +261,8 @@ func _on_MainGame_end_turn(player_number: int) -> void:
 
     if not game_over:
         emit_signal("next_turn", next_player)
+        if is_multiplayer_hotseat_mode():
+            hud._on_game_paused()
 
 
 # Called to start the next turn for a player
