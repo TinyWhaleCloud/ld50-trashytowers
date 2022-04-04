@@ -26,6 +26,10 @@ onready var input_action_left = "player%d_left" % [player_number]
 onready var input_action_right = "player%d_right" % [player_number]
 onready var input_action_up = "player%d_up" % [player_number]
 onready var input_action_down = "player%d_down" % [player_number]
+onready var input_action_left_stick  = "player%d_left_stick" % [player_number]
+onready var input_action_right_stick = "player%d_right_stick" % [player_number]
+onready var input_action_up_stick = "player%d_up_stick" % [player_number]
+onready var input_action_down_stick = "player%d_down_stick" % [player_number]
 onready var input_action_turn_cw = "player%d_turn_cw" % [player_number]
 onready var input_action_turn_ccw = "player%d_turn_ccw" % [player_number]
 onready var input_action_drop = "player%d_drop" % [player_number]
@@ -51,13 +55,13 @@ func process_movement_input() -> void:
     var trash_direction := Vector2(0, 0)
     var trash_rotation := 0
 
-    if Input.is_action_pressed(input_action_left):
+    if Input.is_action_pressed(input_action_left) or Input.is_action_pressed(input_action_left_stick):
         trash_direction.x -= 1
-    if Input.is_action_pressed(input_action_right):
+    if Input.is_action_pressed(input_action_right) or Input.is_action_pressed(input_action_right_stick):
         trash_direction.x += 1
 
     # Accelerate downwards motion
-    if Input.is_action_pressed(input_action_down):
+    if Input.is_action_pressed(input_action_down) or Input.is_action_pressed(input_action_down_stick):
         trash_direction.y += 1
 
     # Rotation
