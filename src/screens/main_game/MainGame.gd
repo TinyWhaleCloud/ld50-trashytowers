@@ -177,7 +177,7 @@ func player_game_over(player_number: int) -> void:
     player.drop_trash()
 
     # Show game over screen
-    hud.show_game_over()
+    hud.show_game_over(is_singleplayer_mode(), player_number)
     if Settings.sfx_enabled:
         $GameOverPlayer.play()
 
