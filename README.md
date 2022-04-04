@@ -23,10 +23,10 @@ If you somehow can (Parsec/ actually meeting people/ whatever else) also try the
 
 ### Chaos
 
-A chaotic mode in which you and your friend(s) try to put trash in the same can simultaneously.  
+A chaotic mode in which you and a friend try to put trash in the same can simultaneously.  
 Whoever has dropped the last piece before the heap spills looses.
 
 ### Hotseat
 
-Take turns with your friend(s) putting trash in the same can.  
+Take turns with a friend putting trash in the same can.  
 Whoever has dropped the last piece before the heap spills looses.  
