@@ -3,6 +3,8 @@ extends Node2D
 const MainGame = preload("res://screens/main_game/MainGame.tscn")
 const InfoScreen = preload("res://screens/info_screen/InfoScreen.tscn")
 
+var loading_game := false
+
 
 func _ready() -> void:
     $Header.grab_focus()
@@ -20,7 +22,11 @@ func _input(event: InputEvent) -> void:
 
 # Start the game in the specified game mode
 func start_game() -> void:
+    if loading_game:
+        return
+
     print("Start game: Switch to MainGame scene")
+    loading_game = true
 
     if Settings.sfx_enabled:
         $StartGameSoundPlayer.play()
